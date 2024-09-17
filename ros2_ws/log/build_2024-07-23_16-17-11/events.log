@@ -1,0 +1,94 @@
+[0.000000] (-) TimerEvent: {}
+[0.000192] (open3d_conversions) JobQueued: {'identifier': 'open3d_conversions', 'dependencies': OrderedDict()}
+[0.000218] (pick_and_place) JobQueued: {'identifier': 'pick_and_place', 'dependencies': OrderedDict()}
+[0.000568] (open3d_conversions) JobStarted: {'identifier': 'open3d_conversions'}
+[0.003243] (pick_and_place) JobStarted: {'identifier': 'pick_and_place'}
+[0.005562] (open3d_conversions) JobProgress: {'identifier': 'open3d_conversions', 'progress': 'cmake'}
+[0.005914] (open3d_conversions) Command: {'cmd': ['/usr/bin/cmake', '/home/sultan/ros2_ws/src/open3d_conversions', '-DCMAKE_INSTALL_PREFIX=/home/sultan/ros2_ws/install/open3d_conversions'], 'cwd': '/home/sultan/ros2_ws/build/open3d_conversions', 'env': OrderedDict([('LESSOPEN', '| /usr/bin/lesspipe %s'), ('USER', 'sultan'), ('XDG_SESSION_TYPE', 'x11'), ('SHLVL', '1'), ('LD_LIBRARY_PATH', '/opt/ros/humble/opt/rviz_ogre_vendor/lib:/opt/ros/humble/lib/x86_64-linux-gnu:/opt/ros/humble/lib'), ('HOME', '/home/sultan'), ('OLDPWD', '/home/sultan'), ('DESKTOP_SESSION', 'ubuntu'), ('ROS_PYTHON_VERSION', '3'), ('GNOME_SHELL_SESSION_MODE', 'ubuntu'), ('GTK_MODULES', 'gail:atk-bridge'), ('SYSTEMD_EXEC_PID', '3816319'), ('DBUS_SESSION_BUS_ADDRESS', 'unix:path=/run/user/1002/bus'), ('COLORTERM', 'truecolor'), ('COLCON_PREFIX_PATH', '/home/sultan/ros2_ws/install'), ('ROS_DISTRO', 'humble'), ('GTK_IM_MODULE', 'ibus'), ('LOGNAME', 'sultan'), ('_', '/usr/bin/colcon'), ('ROS_VERSION', '2'), ('XDG_SESSION_CLASS', 'user'), ('USERNAME', 'sultan'), ('TERM', 'xterm-256color'), ('GNOME_DESKTOP_SESSION_ID', 'this-is-deprecated'), ('ROS_LOCALHOST_ONLY', '0'), ('WINDOWPATH', '3'), ('PATH', '/opt/ros/humble/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin:/snap/bin'), ('SESSION_MANAGER', 'local/elpislab-4090:@/tmp/.ICE-unix/3814806,unix/elpislab-4090:/tmp/.ICE-unix/3814806'), ('XDG_MENU_PREFIX', 'gnome-'), ('GNOME_TERMINAL_SCREEN', '/org/gnome/Terminal/screen/82b19c76_3787_43a0_9302_f13947ea3e09'), ('XDG_RUNTIME_DIR', '/run/user/1002'), ('DISPLAY', ':2'), ('LANG', 'en_US.UTF-8'), ('XDG_CURRENT_DESKTOP', 'ubuntu:GNOME'), ('XMODIFIERS', '@im=ibus'), ('XDG_SESSION_DESKTOP', 'ubuntu'), ('XAUTHORITY', '/run/user/1002/gdm/Xauthority'), ('LS_COLORS', 'rs=0:di=01;34:ln=01;36:mh=00:pi=40;33:so=01;35:do=01;35:bd=40;33;01:cd=40;33;01:or=40;31;01:mi=00:su=37;41:sg=30;43:ca=30;41:tw=30;42:ow=34;42:st=37;44:ex=01;32:*.tar=01;31:*.tgz=01;31:*.arc=01;31:*.arj=01;31:*.taz=01;31:*.lha=01;31:*.lz4=01;31:*.lzh=01;31:*.lzma=01;31:*.tlz=01;31:*.txz=01;31:*.tzo=01;31:*.t7z=01;31:*.zip=01;31:*.z=01;31:*.dz=01;31:*.gz=01;31:*.lrz=01;31:*.lz=01;31:*.lzo=01;31:*.xz=01;31:*.zst=01;31:*.tzst=01;31:*.bz2=01;31:*.bz=01;31:*.tbz=01;31:*.tbz2=01;31:*.tz=01;31:*.deb=01;31:*.rpm=01;31:*.jar=01;31:*.war=01;31:*.ear=01;31:*.sar=01;31:*.rar=01;31:*.alz=01;31:*.ace=01;31:*.zoo=01;31:*.cpio=01;31:*.7z=01;31:*.rz=01;31:*.cab=01;31:*.wim=01;31:*.swm=01;31:*.dwm=01;31:*.esd=01;31:*.jpg=01;35:*.jpeg=01;35:*.mjpg=01;35:*.mjpeg=01;35:*.gif=01;35:*.bmp=01;35:*.pbm=01;35:*.pgm=01;35:*.ppm=01;35:*.tga=01;35:*.xbm=01;35:*.xpm=01;35:*.tif=01;35:*.tiff=01;35:*.png=01;35:*.svg=01;35:*.svgz=01;35:*.mng=01;35:*.pcx=01;35:*.mov=01;35:*.mpg=01;35:*.mpeg=01;35:*.m2v=01;35:*.mkv=01;35:*.webm=01;35:*.webp=01;35:*.ogm=01;35:*.mp4=01;35:*.m4v=01;35:*.mp4v=01;35:*.vob=01;35:*.qt=01;35:*.nuv=01;35:*.wmv=01;35:*.asf=01;35:*.rm=01;35:*.rmvb=01;35:*.flc=01;35:*.avi=01;35:*.fli=01;35:*.flv=01;35:*.gl=01;35:*.dl=01;35:*.xcf=01;35:*.xwd=01;35:*.yuv=01;35:*.cgm=01;35:*.emf=01;35:*.ogv=01;35:*.ogx=01;35:*.aac=00;36:*.au=00;36:*.flac=00;36:*.m4a=00;36:*.mid=00;36:*.midi=00;36:*.mka=00;36:*.mp3=00;36:*.mpc=00;36:*.ogg=00;36:*.ra=00;36:*.wav=00;36:*.oga=00;36:*.opus=00;36:*.spx=00;36:*.xspf=00;36:'), ('GNOME_TERMINAL_SERVICE', ':1.91'), ('SSH_AGENT_LAUNCHER', 'gnome-keyring'), ('SSH_AUTH_SOCK', '/run/user/1002/keyring/ssh'), ('AMENT_PREFIX_PATH', '/home/sultan/ros2_ws/install/pick_and_place:/opt/ros/humble'), ('SHELL', '/bin/bash'), ('QT_ACCESSIBILITY', '1'), ('GDMSESSION', 'ubuntu'), ('LESSCLOSE', '/usr/bin/lesspipe %s %s'), ('GPG_AGENT_INFO', '/run/user/1002/gnupg/S.gpg-agent:0:1'), ('QT_IM_MODULE', 'ibus'), ('PWD', '/home/sultan/ros2_ws/build/open3d_conversions'), ('LC_ALL', 'en_US.UTF-8'), ('XDG_CONFIG_DIRS', '/etc/xdg/xdg-ubuntu:/etc/xdg'), ('XDG_DATA_DIRS', '/usr/share/ubuntu:/usr/share/gnome:/usr/local/share/:/usr/share/:/var/lib/snapd/desktop'), ('PYTHONPATH', '/home/sultan/ros2_ws/install/pick_and_place/lib/python3.10/site-packages:/opt/ros/humble/lib/python3.10/site-packages:/opt/ros/humble/local/lib/python3.10/dist-packages'), ('COLCON', '1'), ('VTE_VERSION', '6800'), ('CMAKE_PREFIX_PATH', '/home/sultan/ros2_ws/install/pick_and_place:/opt/ros/humble')]), 'shell': False}
+[0.013120] (open3d_conversions) StdoutLine: {'line': b'-- Found ament_cmake: 1.3.9 (/opt/ros/humble/share/ament_cmake/cmake)\n'}
+[0.070527] (open3d_conversions) StdoutLine: {'line': b'-- Found ament_cmake_ros: 0.10.0 (/opt/ros/humble/share/ament_cmake_ros/cmake)\n'}
+[0.071908] (open3d_conversions) StderrLine: {'line': b'\x1b[0mCMake Deprecation Warning at /home/sultan/Open3D/build/CMakeFiles/Open3DConfig.cmake:18 (cmake_policy):\n'}
+[0.071977] (open3d_conversions) StderrLine: {'line': b'  The OLD behavior for policy CMP0072 will be removed from a future version\n'}
+[0.072005] (open3d_conversions) StderrLine: {'line': b'  of CMake.\n'}
+[0.072028] (open3d_conversions) StderrLine: {'line': b'\n'}
+[0.072050] (open3d_conversions) StderrLine: {'line': b'  The cmake-policies(7) manual explains that the OLD behaviors of all\n'}
+[0.072073] (open3d_conversions) StderrLine: {'line': b'  policies are deprecated and that a policy should be set to OLD only under\n'}
+[0.072097] (open3d_conversions) StderrLine: {'line': b'  specific short-term circumstances.  Projects should be ported to the NEW\n'}
+[0.072118] (open3d_conversions) StderrLine: {'line': b'  behavior and not rely on setting a policy to OLD.\n'}
+[0.072140] (open3d_conversions) StderrLine: {'line': b'Call Stack (most recent call first):\n'}
+[0.072160] (open3d_conversions) StderrLine: {'line': b'  CMakeLists.txt:15 (find_package)\n'}
+[0.072182] (open3d_conversions) StderrLine: {'line': b'\n'}
+[0.072203] (open3d_conversions) StderrLine: {'line': b'\x1b[0m\n'}
+[0.073034] (open3d_conversions) StdoutLine: {'line': b'-- Looking for pthread.h\n'}
+[0.100075] (-) TimerEvent: {}
+[0.107393] (open3d_conversions) StdoutLine: {'line': b'-- Looking for pthread.h - found\n'}
+[0.107509] (open3d_conversions) StdoutLine: {'line': b'-- Performing Test CMAKE_HAVE_LIBC_PTHREAD\n'}
+[0.143632] (open3d_conversions) StdoutLine: {'line': b'-- Performing Test CMAKE_HAVE_LIBC_PTHREAD - Success\n'}
+[0.144030] (open3d_conversions) StdoutLine: {'line': b'-- Found Threads: TRUE  \n'}
+[0.200184] (-) TimerEvent: {}
+[0.259458] (pick_and_place) Command: {'cmd': ['/usr/bin/python3', '-W', 'ignore:setup.py install is deprecated', 'setup.py', 'egg_info', '--egg-base', '../../build/pick_and_place', 'build', '--build-base', '/home/sultan/ros2_ws/build/pick_and_place/build', 'install', '--record', '/home/sultan/ros2_ws/build/pick_and_place/install.log', '--single-version-externally-managed', 'install_data'], 'cwd': '/home/sultan/ros2_ws/src/pick_and_place', 'env': {'LESSOPEN': '| /usr/bin/lesspipe %s', 'USER': 'sultan', 'XDG_SESSION_TYPE': 'x11', 'SHLVL': '1', 'LD_LIBRARY_PATH': '/opt/ros/humble/opt/rviz_ogre_vendor/lib:/opt/ros/humble/lib/x86_64-linux-gnu:/opt/ros/humble/lib', 'HOME': '/home/sultan', 'OLDPWD': '/home/sultan', 'DESKTOP_SESSION': 'ubuntu', 'ROS_PYTHON_VERSION': '3', 'GNOME_SHELL_SESSION_MODE': 'ubuntu', 'GTK_MODULES': 'gail:atk-bridge', 'SYSTEMD_EXEC_PID': '3816319', 'DBUS_SESSION_BUS_ADDRESS': 'unix:path=/run/user/1002/bus', 'COLORTERM': 'truecolor', 'COLCON_PREFIX_PATH': '/home/sultan/ros2_ws/install', 'ROS_DISTRO': 'humble', 'GTK_IM_MODULE': 'ibus', 'LOGNAME': 'sultan', '_': '/usr/bin/colcon', 'ROS_VERSION': '2', 'XDG_SESSION_CLASS': 'user', 'USERNAME': 'sultan', 'TERM': 'xterm-256color', 'GNOME_DESKTOP_SESSION_ID': 'this-is-deprecated', 'ROS_LOCALHOST_ONLY': '0', 'WINDOWPATH': '3', 'PATH': '/opt/ros/humble/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin:/snap/bin', 'SESSION_MANAGER': 'local/elpislab-4090:@/tmp/.ICE-unix/3814806,unix/elpislab-4090:/tmp/.ICE-unix/3814806', 'XDG_MENU_PREFIX': 'gnome-', 'GNOME_TERMINAL_SCREEN': '/org/gnome/Terminal/screen/82b19c76_3787_43a0_9302_f13947ea3e09', 'XDG_RUNTIME_DIR': '/run/user/1002', 'DISPLAY': ':2', 'LANG': 'en_US.UTF-8', 'XDG_CURRENT_DESKTOP': 'ubuntu:GNOME', 'XMODIFIERS': '@im=ibus', 'XDG_SESSION_DESKTOP': 'ubuntu', 'XAUTHORITY': '/run/user/1002/gdm/Xauthority', 'LS_COLORS': 'rs=0:di=01;34:ln=01;36:mh=00:pi=40;33:so=01;35:do=01;35:bd=40;33;01:cd=40;33;01:or=40;31;01:mi=00:su=37;41:sg=30;43:ca=30;41:tw=30;42:ow=34;42:st=37;44:ex=01;32:*.tar=01;31:*.tgz=01;31:*.arc=01;31:*.arj=01;31:*.taz=01;31:*.lha=01;31:*.lz4=01;31:*.lzh=01;31:*.lzma=01;31:*.tlz=01;31:*.txz=01;31:*.tzo=01;31:*.t7z=01;31:*.zip=01;31:*.z=01;31:*.dz=01;31:*.gz=01;31:*.lrz=01;31:*.lz=01;31:*.lzo=01;31:*.xz=01;31:*.zst=01;31:*.tzst=01;31:*.bz2=01;31:*.bz=01;31:*.tbz=01;31:*.tbz2=01;31:*.tz=01;31:*.deb=01;31:*.rpm=01;31:*.jar=01;31:*.war=01;31:*.ear=01;31:*.sar=01;31:*.rar=01;31:*.alz=01;31:*.ace=01;31:*.zoo=01;31:*.cpio=01;31:*.7z=01;31:*.rz=01;31:*.cab=01;31:*.wim=01;31:*.swm=01;31:*.dwm=01;31:*.esd=01;31:*.jpg=01;35:*.jpeg=01;35:*.mjpg=01;35:*.mjpeg=01;35:*.gif=01;35:*.bmp=01;35:*.pbm=01;35:*.pgm=01;35:*.ppm=01;35:*.tga=01;35:*.xbm=01;35:*.xpm=01;35:*.tif=01;35:*.tiff=01;35:*.png=01;35:*.svg=01;35:*.svgz=01;35:*.mng=01;35:*.pcx=01;35:*.mov=01;35:*.mpg=01;35:*.mpeg=01;35:*.m2v=01;35:*.mkv=01;35:*.webm=01;35:*.webp=01;35:*.ogm=01;35:*.mp4=01;35:*.m4v=01;35:*.mp4v=01;35:*.vob=01;35:*.qt=01;35:*.nuv=01;35:*.wmv=01;35:*.asf=01;35:*.rm=01;35:*.rmvb=01;35:*.flc=01;35:*.avi=01;35:*.fli=01;35:*.flv=01;35:*.gl=01;35:*.dl=01;35:*.xcf=01;35:*.xwd=01;35:*.yuv=01;35:*.cgm=01;35:*.emf=01;35:*.ogv=01;35:*.ogx=01;35:*.aac=00;36:*.au=00;36:*.flac=00;36:*.m4a=00;36:*.mid=00;36:*.midi=00;36:*.mka=00;36:*.mp3=00;36:*.mpc=00;36:*.ogg=00;36:*.ra=00;36:*.wav=00;36:*.oga=00;36:*.opus=00;36:*.spx=00;36:*.xspf=00;36:', 'GNOME_TERMINAL_SERVICE': ':1.91', 'SSH_AGENT_LAUNCHER': 'gnome-keyring', 'SSH_AUTH_SOCK': '/run/user/1002/keyring/ssh', 'AMENT_PREFIX_PATH': '/home/sultan/ros2_ws/install/pick_and_place:/opt/ros/humble', 'SHELL': '/bin/bash', 'QT_ACCESSIBILITY': '1', 'GDMSESSION': 'ubuntu', 'LESSCLOSE': '/usr/bin/lesspipe %s %s', 'GPG_AGENT_INFO': '/run/user/1002/gnupg/S.gpg-agent:0:1', 'QT_IM_MODULE': 'ibus', 'PWD': '/home/sultan/ros2_ws/build/pick_and_place', 'LC_ALL': 'en_US.UTF-8', 'XDG_CONFIG_DIRS': '/etc/xdg/xdg-ubuntu:/etc/xdg', 'XDG_DATA_DIRS': '/usr/share/ubuntu:/usr/share/gnome:/usr/local/share/:/usr/share/:/var/lib/snapd/desktop', 'PYTHONPATH': '/home/sultan/ros2_ws/build/pick_and_place/prefix_override:/usr/lib/python3/dist-packages/colcon_core/task/python/colcon_distutils_commands:/home/sultan/ros2_ws/install/pick_and_place/lib/python3.10/site-packages:/home/sultan/ros2_ws/install/pick_and_place/lib/python3.10/site-packages:/opt/ros/humble/lib/python3.10/site-packages:/opt/ros/humble/local/lib/python3.10/dist-packages', 'COLCON': '1', 'VTE_VERSION': '6800'}, 'shell': False}
+[0.260366] (open3d_conversions) StdoutLine: {'line': b'-- Found OpenMP_C: -fopenmp (found version "4.5") \n'}
+[0.299976] (open3d_conversions) StdoutLine: {'line': b'-- Found OpenMP_CXX: -fopenmp (found version "4.5") \n'}
+[0.300087] (open3d_conversions) StdoutLine: {'line': b'-- Found OpenMP: TRUE (found version "4.5")  \n'}
+[0.300235] (-) TimerEvent: {}
+[0.339391] (open3d_conversions) StdoutLine: {'line': b'-- Found X11: /usr/include   \n'}
+[0.339485] (open3d_conversions) StdoutLine: {'line': b'-- Looking for XOpenDisplay in /usr/lib/x86_64-linux-gnu/libX11.so;/usr/lib/x86_64-linux-gnu/libXext.so\n'}
+[0.362339] (pick_and_place) StdoutLine: {'line': b'running egg_info\n'}
+[0.362606] (pick_and_place) StdoutLine: {'line': b'writing ../../build/pick_and_place/pick_and_place.egg-info/PKG-INFO\n'}
+[0.362906] (pick_and_place) StdoutLine: {'line': b'writing dependency_links to ../../build/pick_and_place/pick_and_place.egg-info/dependency_links.txt\n'}
+[0.363170] (pick_and_place) StdoutLine: {'line': b'writing entry points to ../../build/pick_and_place/pick_and_place.egg-info/entry_points.txt\n'}
+[0.363198] (pick_and_place) StdoutLine: {'line': b'writing requirements to ../../build/pick_and_place/pick_and_place.egg-info/requires.txt\n'}
+[0.363221] (pick_and_place) StdoutLine: {'line': b'writing top-level names to ../../build/pick_and_place/pick_and_place.egg-info/top_level.txt\n'}
+[0.363476] (pick_and_place) StdoutLine: {'line': b"reading manifest file '../../build/pick_and_place/pick_and_place.egg-info/SOURCES.txt'\n"}
+[0.363672] (pick_and_place) StdoutLine: {'line': b"adding license file 'LICENSE'\n"}
+[0.364005] (pick_and_place) StdoutLine: {'line': b"writing manifest file '../../build/pick_and_place/pick_and_place.egg-info/SOURCES.txt'\n"}
+[0.364033] (pick_and_place) StdoutLine: {'line': b'running build\n'}
+[0.364058] (pick_and_place) StdoutLine: {'line': b'running build_py\n'}
+[0.364603] (pick_and_place) StdoutLine: {'line': b'running install\n'}
+[0.364752] (pick_and_place) StdoutLine: {'line': b'running install_lib\n'}
+[0.365265] (pick_and_place) StdoutLine: {'line': b'running install_data\n'}
+[0.365364] (pick_and_place) StdoutLine: {'line': b'running install_egg_info\n'}
+[0.366052] (pick_and_place) StdoutLine: {'line': b"removing '/home/sultan/ros2_ws/install/pick_and_place/lib/python3.10/site-packages/pick_and_place-0.0.0-py3.10.egg-info' (and everything under it)\n"}
+[0.366185] (pick_and_place) StdoutLine: {'line': b'Copying ../../build/pick_and_place/pick_and_place.egg-info to /home/sultan/ros2_ws/install/pick_and_place/lib/python3.10/site-packages/pick_and_place-0.0.0-py3.10.egg-info\n'}
+[0.366628] (pick_and_place) StdoutLine: {'line': b'running install_scripts\n'}
+[0.373427] (open3d_conversions) StdoutLine: {'line': b'-- Looking for XOpenDisplay in /usr/lib/x86_64-linux-gnu/libX11.so;/usr/lib/x86_64-linux-gnu/libXext.so - found\n'}
+[0.373488] (open3d_conversions) StdoutLine: {'line': b'-- Looking for gethostbyname\n'}
+[0.376007] (pick_and_place) StdoutLine: {'line': b'Installing edge_grasp script to /home/sultan/ros2_ws/install/pick_and_place/lib/pick_and_place\n'}
+[0.376066] (pick_and_place) StdoutLine: {'line': b'Installing pc_subscriber script to /home/sultan/ros2_ws/install/pick_and_place/lib/pick_and_place\n'}
+[0.376208] (pick_and_place) StdoutLine: {'line': b"writing list of installed files to '/home/sultan/ros2_ws/build/pick_and_place/install.log'\n"}
+[0.386363] (pick_and_place) CommandEnded: {'returncode': 0}
+[0.390833] (pick_and_place) JobEnded: {'identifier': 'pick_and_place', 'rc': 0}
+[0.400300] (-) TimerEvent: {}
+[0.406201] (open3d_conversions) StdoutLine: {'line': b'-- Looking for gethostbyname - found\n'}
+[0.406302] (open3d_conversions) StdoutLine: {'line': b'-- Looking for connect\n'}
+[0.471993] (open3d_conversions) StdoutLine: {'line': b'-- Looking for connect - found\n'}
+[0.472110] (open3d_conversions) StdoutLine: {'line': b'-- Looking for remove\n'}
+[0.500499] (-) TimerEvent: {}
+[0.535268] (open3d_conversions) StdoutLine: {'line': b'-- Looking for remove - found\n'}
+[0.535369] (open3d_conversions) StdoutLine: {'line': b'-- Looking for shmat\n'}
+[0.600597] (-) TimerEvent: {}
+[0.609114] (open3d_conversions) StdoutLine: {'line': b'-- Looking for shmat - found\n'}
+[0.609248] (open3d_conversions) StdoutLine: {'line': b'-- Looking for IceConnectionNumber in ICE\n'}
+[0.641739] (open3d_conversions) StdoutLine: {'line': b'-- Looking for IceConnectionNumber in ICE - found\n'}
+[0.644444] (open3d_conversions) StdoutLine: {'line': b'-- Found OpenGL: /usr/lib/x86_64-linux-gnu/libOpenGL.so   \n'}
+[0.644647] (open3d_conversions) StderrLine: {'line': b'\x1b[31mCMake Error at /home/sultan/Open3D/build/CMakeFiles/Open3DConfig.cmake:28 (include):\n'}
+[0.644727] (open3d_conversions) StderrLine: {'line': b'  include could not find requested file:\n'}
+[0.644755] (open3d_conversions) StderrLine: {'line': b'\n'}
+[0.644781] (open3d_conversions) StderrLine: {'line': b'    /home/sultan/Open3D/build/CMakeFiles/Open3DTargets.cmake\n'}
+[0.644950] (open3d_conversions) StderrLine: {'line': b'Call Stack (most recent call first):\n'}
+[0.644980] (open3d_conversions) StderrLine: {'line': b'  CMakeLists.txt:15 (find_package)\n'}
+[0.645004] (open3d_conversions) StderrLine: {'line': b'\n'}
+[0.645027] (open3d_conversions) StderrLine: {'line': b'\x1b[0m\n'}
+[0.645050] (open3d_conversions) StderrLine: {'line': b'\x1b[31mCMake Error at /home/sultan/Open3D/build/CMakeFiles/Open3DConfig.cmake:11 (message):\n'}
+[0.645072] (open3d_conversions) StderrLine: {'line': b'  File or directory /home/sultan/include referenced by variable\n'}
+[0.645093] (open3d_conversions) StderrLine: {'line': b'  Open3D_INCLUDE_DIRS does not exist !\n'}
+[0.645113] (open3d_conversions) StderrLine: {'line': b'Call Stack (most recent call first):\n'}
+[0.645134] (open3d_conversions) StderrLine: {'line': b'  /home/sultan/Open3D/build/CMakeFiles/Open3DConfig.cmake:45 (set_and_check)\n'}
+[0.645156] (open3d_conversions) StderrLine: {'line': b'  CMakeLists.txt:15 (find_package)\n'}
+[0.645176] (open3d_conversions) StderrLine: {'line': b'\n'}
+[0.645198] (open3d_conversions) StderrLine: {'line': b'\x1b[0m\n'}
+[0.645221] (open3d_conversions) StdoutLine: {'line': b'-- Configuring incomplete, errors occurred!\n'}
+[0.645245] (open3d_conversions) StdoutLine: {'line': b'See also "/home/sultan/ros2_ws/build/open3d_conversions/CMakeFiles/CMakeOutput.log".\n'}
+[0.647389] (open3d_conversions) CommandEnded: {'returncode': 1}
+[0.655396] (open3d_conversions) JobEnded: {'identifier': 'open3d_conversions', 'rc': 1}
+[0.665648] (-) EventReactorShutdown: {}

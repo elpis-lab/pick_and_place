@@ -1,0 +1,34 @@
+[0.006s] Invoking command in '/home/sultan/ros2_ws/build/open3d_conversions': CMAKE_PREFIX_PATH=/home/sultan/ros2_ws/install/pick_and_place:/opt/ros/humble /usr/bin/cmake /home/sultan/ros2_ws/src/open3d_conversions -DCMAKE_INSTALL_PREFIX=/home/sultan/ros2_ws/install/open3d_conversions
+[0.032s] -- The C compiler identification is GNU 11.4.0
+[0.057s] -- The CXX compiler identification is GNU 11.4.0
+[0.061s] -- Detecting C compiler ABI info
+[0.089s] -- Detecting C compiler ABI info - done
+[0.096s] -- Check for working C compiler: /usr/bin/cc - skipped
+[0.097s] -- Detecting C compile features
+[0.097s] -- Detecting C compile features - done
+[0.099s] -- Detecting CXX compiler ABI info
+[0.131s] -- Detecting CXX compiler ABI info - done
+[0.139s] -- Check for working CXX compiler: /usr/bin/c++ - skipped
+[0.139s] -- Detecting CXX compile features
+[0.139s] -- Detecting CXX compile features - done
+[0.139s] -- Found ament_cmake: 1.3.9 (/opt/ros/humble/share/ament_cmake/cmake)
+[0.232s] -- Found ament_cmake_ros: 0.10.0 (/opt/ros/humble/share/ament_cmake_ros/cmake)
+[0.238s] [31mCMake Error at CMakeLists.txt:13 (find_package):
+[0.238s]   By not providing "FindOpen3D.cmake" in CMAKE_MODULE_PATH this project has
+[0.238s]   asked CMake to find a package configuration file provided by "Open3D", but
+[0.238s]   CMake did not find one.
+[0.238s] 
+[0.238s]   Could not find a package configuration file provided by "Open3D" with any
+[0.238s]   of the following names:
+[0.238s] 
+[0.238s]     Open3DConfig.cmake
+[0.238s]     open3d-config.cmake
+[0.238s] 
+[0.238s]   Add the installation prefix of "Open3D" to CMAKE_PREFIX_PATH or set
+[0.238s]   "Open3D_DIR" to a directory containing one of the above files.  If "Open3D"
+[0.238s]   provides a separate development package or SDK, be sure it has been
+[0.238s]   installed.
+[0.238s] 
+[0.238s] [0m
+[0.238s] -- Configuring incomplete, errors occurred!
+[0.241s] Invoked command in '/home/sultan/ros2_ws/build/open3d_conversions' returned '1': CMAKE_PREFIX_PATH=/home/sultan/ros2_ws/install/pick_and_place:/opt/ros/humble /usr/bin/cmake /home/sultan/ros2_ws/src/open3d_conversions -DCMAKE_INSTALL_PREFIX=/home/sultan/ros2_ws/install/open3d_conversions

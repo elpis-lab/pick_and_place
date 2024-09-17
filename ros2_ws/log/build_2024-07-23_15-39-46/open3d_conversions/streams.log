@@ -1,0 +1,33 @@
+[0.005s] Invoking command in '/home/sultan/ros2_ws/build/open3d_conversions': /usr/bin/cmake /home/sultan/ros2_ws/src/open3d_conversions -DCATKIN_INSTALL_INTO_PREFIX_ROOT=0 -DCMAKE_INSTALL_PREFIX=/home/sultan/ros2_ws/install/open3d_conversions
+[0.030s] -- The C compiler identification is GNU 11.4.0
+[0.055s] -- The CXX compiler identification is GNU 11.4.0
+[0.058s] -- Detecting C compiler ABI info
+[0.089s] -- Detecting C compiler ABI info - done
+[0.092s] -- Check for working C compiler: /usr/bin/cc - skipped
+[0.092s] -- Detecting C compile features
+[0.092s] -- Detecting C compile features - done
+[0.094s] -- Detecting CXX compiler ABI info
+[0.128s] -- Detecting CXX compiler ABI info - done
+[0.131s] -- Check for working CXX compiler: /usr/bin/c++ - skipped
+[0.131s] -- Detecting CXX compile features
+[0.132s] -- Detecting CXX compile features - done
+[0.137s] [31mCMake Error at CMakeLists.txt:4 (find_package):
+[0.137s]   By not providing "Findcatkin.cmake" in CMAKE_MODULE_PATH this project has
+[0.137s]   asked CMake to find a package configuration file provided by "catkin", but
+[0.137s]   CMake did not find one.
+[0.137s] 
+[0.137s]   Could not find a package configuration file provided by "catkin" with any
+[0.137s]   of the following names:
+[0.137s] 
+[0.137s]     catkinConfig.cmake
+[0.137s]     catkin-config.cmake
+[0.137s] 
+[0.137s]   Add the installation prefix of "catkin" to CMAKE_PREFIX_PATH or set
+[0.137s]   "catkin_DIR" to a directory containing one of the above files.  If "catkin"
+[0.137s]   provides a separate development package or SDK, be sure it has been
+[0.137s]   installed.
+[0.138s] 
+[0.138s] [0m
+[0.138s] -- Configuring incomplete, errors occurred!
+[0.138s] See also "/home/sultan/ros2_ws/build/open3d_conversions/CMakeFiles/CMakeOutput.log".
+[0.139s] Invoked command in '/home/sultan/ros2_ws/build/open3d_conversions' returned '1': /usr/bin/cmake /home/sultan/ros2_ws/src/open3d_conversions -DCATKIN_INSTALL_INTO_PREFIX_ROOT=0 -DCMAKE_INSTALL_PREFIX=/home/sultan/ros2_ws/install/open3d_conversions

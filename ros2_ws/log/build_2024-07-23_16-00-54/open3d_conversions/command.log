@@ -1,0 +1,2 @@
+Invoking command in '/home/sultan/ros2_ws/build/open3d_conversions': /usr/bin/cmake /home/sultan/ros2_ws/src/open3d_conversions -DCATKIN_INSTALL_INTO_PREFIX_ROOT=0 -DCMAKE_INSTALL_PREFIX=/home/sultan/ros2_ws/install/open3d_conversions
+Invoked command in '/home/sultan/ros2_ws/build/open3d_conversions' returned '1': /usr/bin/cmake /home/sultan/ros2_ws/src/open3d_conversions -DCATKIN_INSTALL_INTO_PREFIX_ROOT=0 -DCMAKE_INSTALL_PREFIX=/home/sultan/ros2_ws/install/open3d_conversions

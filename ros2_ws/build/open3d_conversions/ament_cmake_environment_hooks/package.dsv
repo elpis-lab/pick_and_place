@@ -1,0 +1,4 @@
+source;share/open3d_conversions/local_setup.bash
+source;share/open3d_conversions/local_setup.dsv
+source;share/open3d_conversions/local_setup.sh
+source;share/open3d_conversions/local_setup.zsh

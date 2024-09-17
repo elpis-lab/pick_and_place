@@ -1,0 +1,34 @@
+[0.006s] Invoking command in '/home/sultan/ros2_ws/build/open3d_conversions': CMAKE_PREFIX_PATH=/home/sultan/ros2_ws/install/pick_and_place:/opt/ros/humble /usr/bin/cmake /home/sultan/ros2_ws/src/open3d_conversions -DCMAKE_INSTALL_PREFIX=/home/sultan/ros2_ws/install/open3d_conversions
+[0.012s] -- Found ament_cmake: 1.3.9 (/opt/ros/humble/share/ament_cmake/cmake)
+[0.069s] -- Found ament_cmake_ros: 0.10.0 (/opt/ros/humble/share/ament_cmake_ros/cmake)
+[0.071s] [0mCMake Deprecation Warning at /home/sultan/Open3D/build/CMakeFiles/Open3DConfig.cmake:18 (cmake_policy):
+[0.071s]   The OLD behavior for policy CMP0072 will be removed from a future version
+[0.071s]   of CMake.
+[0.071s] 
+[0.071s]   The cmake-policies(7) manual explains that the OLD behaviors of all
+[0.071s]   policies are deprecated and that a policy should be set to OLD only under
+[0.071s]   specific short-term circumstances.  Projects should be ported to the NEW
+[0.071s]   behavior and not rely on setting a policy to OLD.
+[0.071s] Call Stack (most recent call first):
+[0.071s]   CMakeLists.txt:15 (find_package)
+[0.071s] 
+[0.071s] [0m
+[0.089s] -- Configuring incomplete, errors occurred!
+[0.089s] See also "/home/sultan/ros2_ws/build/open3d_conversions/CMakeFiles/CMakeOutput.log".
+[0.089s] [31mCMake Error at /home/sultan/Open3D/build/CMakeFiles/Open3DConfig.cmake:28 (include):
+[0.089s]   include could not find requested file:
+[0.089s] 
+[0.089s]     /home/sultan/Open3D/build/CMakeFiles/Open3DTargets.cmake
+[0.089s] Call Stack (most recent call first):
+[0.089s]   CMakeLists.txt:15 (find_package)
+[0.089s] 
+[0.089s] [0m
+[0.089s] [31mCMake Error at /home/sultan/Open3D/build/CMakeFiles/Open3DConfig.cmake:11 (message):
+[0.089s]   File or directory /home/sultan/include referenced by variable
+[0.089s]   Open3D_INCLUDE_DIRS does not exist !
+[0.089s] Call Stack (most recent call first):
+[0.089s]   /home/sultan/Open3D/build/CMakeFiles/Open3DConfig.cmake:45 (set_and_check)
+[0.089s]   CMakeLists.txt:15 (find_package)
+[0.089s] 
+[0.089s] [0m
+[0.125s] Invoked command in '/home/sultan/ros2_ws/build/open3d_conversions' returned '1': CMAKE_PREFIX_PATH=/home/sultan/ros2_ws/install/pick_and_place:/opt/ros/humble /usr/bin/cmake /home/sultan/ros2_ws/src/open3d_conversions -DCMAKE_INSTALL_PREFIX=/home/sultan/ros2_ws/install/open3d_conversions

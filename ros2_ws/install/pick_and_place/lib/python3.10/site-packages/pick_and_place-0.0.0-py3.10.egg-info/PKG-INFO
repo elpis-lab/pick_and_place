@@ -1,0 +1,13 @@
+Metadata-Version: 2.1
+Name: pick-and-place
+Version: 0.0.0
+Summary: Package for publishing end effector pose for pick and place task.
+Home-page: UNKNOWN
+Maintainer: sultan
+Maintainer-email: msultan@wpi.edu
+License: Apache-2.0
+Platform: UNKNOWN
+License-File: LICENSE
+
+UNKNOWN
+

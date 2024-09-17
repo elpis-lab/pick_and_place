@@ -1,0 +1,2 @@
+Invoking command in '/home/sultan/ros2_ws/build/open3d_conversions': CMAKE_PREFIX_PATH=/home/sultan/ros2_ws/install/pick_and_place:/opt/ros/humble /usr/bin/cmake /home/sultan/ros2_ws/src/open3d_conversions -DCMAKE_INSTALL_PREFIX=/home/sultan/ros2_ws/install/open3d_conversions
+Invoked command in '/home/sultan/ros2_ws/build/open3d_conversions' returned '1': CMAKE_PREFIX_PATH=/home/sultan/ros2_ws/install/pick_and_place:/opt/ros/humble /usr/bin/cmake /home/sultan/ros2_ws/src/open3d_conversions -DCMAKE_INSTALL_PREFIX=/home/sultan/ros2_ws/install/open3d_conversions

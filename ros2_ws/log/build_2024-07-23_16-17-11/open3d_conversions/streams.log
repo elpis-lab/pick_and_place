@@ -1,0 +1,56 @@
+[0.006s] Invoking command in '/home/sultan/ros2_ws/build/open3d_conversions': CMAKE_PREFIX_PATH=/home/sultan/ros2_ws/install/pick_and_place:/opt/ros/humble /usr/bin/cmake /home/sultan/ros2_ws/src/open3d_conversions -DCMAKE_INSTALL_PREFIX=/home/sultan/ros2_ws/install/open3d_conversions
+[0.013s] -- Found ament_cmake: 1.3.9 (/opt/ros/humble/share/ament_cmake/cmake)
+[0.070s] -- Found ament_cmake_ros: 0.10.0 (/opt/ros/humble/share/ament_cmake_ros/cmake)
+[0.071s] [0mCMake Deprecation Warning at /home/sultan/Open3D/build/CMakeFiles/Open3DConfig.cmake:18 (cmake_policy):
+[0.071s]   The OLD behavior for policy CMP0072 will be removed from a future version
+[0.071s]   of CMake.
+[0.071s] 
+[0.071s]   The cmake-policies(7) manual explains that the OLD behaviors of all
+[0.072s]   policies are deprecated and that a policy should be set to OLD only under
+[0.072s]   specific short-term circumstances.  Projects should be ported to the NEW
+[0.072s]   behavior and not rely on setting a policy to OLD.
+[0.072s] Call Stack (most recent call first):
+[0.072s]   CMakeLists.txt:15 (find_package)
+[0.072s] 
+[0.072s] [0m
+[0.072s] -- Looking for pthread.h
+[0.107s] -- Looking for pthread.h - found
+[0.107s] -- Performing Test CMAKE_HAVE_LIBC_PTHREAD
+[0.143s] -- Performing Test CMAKE_HAVE_LIBC_PTHREAD - Success
+[0.143s] -- Found Threads: TRUE  
+[0.260s] -- Found OpenMP_C: -fopenmp (found version "4.5") 
+[0.299s] -- Found OpenMP_CXX: -fopenmp (found version "4.5") 
+[0.300s] -- Found OpenMP: TRUE (found version "4.5")  
+[0.339s] -- Found X11: /usr/include   
+[0.339s] -- Looking for XOpenDisplay in /usr/lib/x86_64-linux-gnu/libX11.so;/usr/lib/x86_64-linux-gnu/libXext.so
+[0.373s] -- Looking for XOpenDisplay in /usr/lib/x86_64-linux-gnu/libX11.so;/usr/lib/x86_64-linux-gnu/libXext.so - found
+[0.373s] -- Looking for gethostbyname
+[0.406s] -- Looking for gethostbyname - found
+[0.406s] -- Looking for connect
+[0.471s] -- Looking for connect - found
+[0.472s] -- Looking for remove
+[0.535s] -- Looking for remove - found
+[0.535s] -- Looking for shmat
+[0.609s] -- Looking for shmat - found
+[0.609s] -- Looking for IceConnectionNumber in ICE
+[0.641s] -- Looking for IceConnectionNumber in ICE - found
+[0.644s] -- Found OpenGL: /usr/lib/x86_64-linux-gnu/libOpenGL.so   
+[0.644s] [31mCMake Error at /home/sultan/Open3D/build/CMakeFiles/Open3DConfig.cmake:28 (include):
+[0.644s]   include could not find requested file:
+[0.644s] 
+[0.644s]     /home/sultan/Open3D/build/CMakeFiles/Open3DTargets.cmake
+[0.644s] Call Stack (most recent call first):
+[0.644s]   CMakeLists.txt:15 (find_package)
+[0.644s] 
+[0.644s] [0m
+[0.644s] [31mCMake Error at /home/sultan/Open3D/build/CMakeFiles/Open3DConfig.cmake:11 (message):
+[0.645s]   File or directory /home/sultan/include referenced by variable
+[0.645s]   Open3D_INCLUDE_DIRS does not exist !
+[0.645s] Call Stack (most recent call first):
+[0.645s]   /home/sultan/Open3D/build/CMakeFiles/Open3DConfig.cmake:45 (set_and_check)
+[0.645s]   CMakeLists.txt:15 (find_package)
+[0.645s] 
+[0.645s] [0m
+[0.645s] -- Configuring incomplete, errors occurred!
+[0.645s] See also "/home/sultan/ros2_ws/build/open3d_conversions/CMakeFiles/CMakeOutput.log".
+[0.647s] Invoked command in '/home/sultan/ros2_ws/build/open3d_conversions' returned '1': CMAKE_PREFIX_PATH=/home/sultan/ros2_ws/install/pick_and_place:/opt/ros/humble /usr/bin/cmake /home/sultan/ros2_ws/src/open3d_conversions -DCMAKE_INSTALL_PREFIX=/home/sultan/ros2_ws/install/open3d_conversions

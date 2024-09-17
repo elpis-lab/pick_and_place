@@ -1,0 +1,4 @@
+[console_scripts]
+depth = pick_and_place.depth_map_pub:main
+depth_sub = pick_and_place.depth_subscriber:main
+

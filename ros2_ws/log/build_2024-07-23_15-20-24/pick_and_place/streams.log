@@ -1,0 +1,27 @@
+[0.254s] Invoking command in '/home/sultan/ros2_ws/src/pick_and_place': PYTHONPATH=/home/sultan/ros2_ws/build/pick_and_place/prefix_override:/usr/lib/python3/dist-packages/colcon_core/task/python/colcon_distutils_commands:/home/sultan/ros2_ws/install/pick_and_place/lib/python3.10/site-packages:${PYTHONPATH} /usr/bin/python3 -W ignore:setup.py install is deprecated setup.py egg_info --egg-base ../../build/pick_and_place build --build-base /home/sultan/ros2_ws/build/pick_and_place/build install --record /home/sultan/ros2_ws/build/pick_and_place/install.log --single-version-externally-managed install_data
+[0.354s] running egg_info
+[0.354s] writing ../../build/pick_and_place/pick_and_place.egg-info/PKG-INFO
+[0.354s] writing dependency_links to ../../build/pick_and_place/pick_and_place.egg-info/dependency_links.txt
+[0.354s] writing entry points to ../../build/pick_and_place/pick_and_place.egg-info/entry_points.txt
+[0.354s] writing requirements to ../../build/pick_and_place/pick_and_place.egg-info/requires.txt
+[0.355s] writing top-level names to ../../build/pick_and_place/pick_and_place.egg-info/top_level.txt
+[0.355s] reading manifest file '../../build/pick_and_place/pick_and_place.egg-info/SOURCES.txt'
+[0.355s] adding license file 'LICENSE'
+[0.356s] writing manifest file '../../build/pick_and_place/pick_and_place.egg-info/SOURCES.txt'
+[0.356s] running build
+[0.356s] running build_py
+[0.356s] copying pick_and_place/pcd_subscriber_node.py -> /home/sultan/ros2_ws/build/pick_and_place/build/lib/pick_and_place
+[0.356s] running install
+[0.356s] running install_lib
+[0.357s] copying /home/sultan/ros2_ws/build/pick_and_place/build/lib/pick_and_place/pcd_subscriber_node.py -> /home/sultan/ros2_ws/install/pick_and_place/lib/python3.10/site-packages/pick_and_place
+[0.357s] byte-compiling /home/sultan/ros2_ws/install/pick_and_place/lib/python3.10/site-packages/pick_and_place/pcd_subscriber_node.py to pcd_subscriber_node.cpython-310.pyc
+[0.358s] running install_data
+[0.358s] running install_egg_info
+[0.358s] removing '/home/sultan/ros2_ws/install/pick_and_place/lib/python3.10/site-packages/pick_and_place-0.0.0-py3.10.egg-info' (and everything under it)
+[0.358s] Copying ../../build/pick_and_place/pick_and_place.egg-info to /home/sultan/ros2_ws/install/pick_and_place/lib/python3.10/site-packages/pick_and_place-0.0.0-py3.10.egg-info
+[0.359s] running install_scripts
+[0.368s] Installing edge_grasp script to /home/sultan/ros2_ws/install/pick_and_place/lib/pick_and_place
+[0.368s] Installing pc_subscriber script to /home/sultan/ros2_ws/install/pick_and_place/lib/pick_and_place
+[0.368s] Installing pc_viz script to /home/sultan/ros2_ws/install/pick_and_place/lib/pick_and_place
+[0.368s] writing list of installed files to '/home/sultan/ros2_ws/build/pick_and_place/install.log'
+[0.377s] Invoked command in '/home/sultan/ros2_ws/src/pick_and_place' returned '0': PYTHONPATH=/home/sultan/ros2_ws/build/pick_and_place/prefix_override:/usr/lib/python3/dist-packages/colcon_core/task/python/colcon_distutils_commands:/home/sultan/ros2_ws/install/pick_and_place/lib/python3.10/site-packages:${PYTHONPATH} /usr/bin/python3 -W ignore:setup.py install is deprecated setup.py egg_info --egg-base ../../build/pick_and_place build --build-base /home/sultan/ros2_ws/build/pick_and_place/build install --record /home/sultan/ros2_ws/build/pick_and_place/install.log --single-version-externally-managed install_data

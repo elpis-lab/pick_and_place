@@ -1,0 +1,21 @@
+[0.006s] Invoking command in '/home/sultan/ros2_ws/build/open3d_conversions': /usr/bin/cmake /home/sultan/ros2_ws/src/open3d_conversions -DCATKIN_INSTALL_INTO_PREFIX_ROOT=0 -DCMAKE_INSTALL_PREFIX=/home/sultan/ros2_ws/install/open3d_conversions
+[0.019s] [31mCMake Error at CMakeLists.txt:4 (find_package):
+[0.019s]   By not providing "Findcatkin.cmake" in CMAKE_MODULE_PATH this project has
+[0.019s]   asked CMake to find a package configuration file provided by "catkin", but
+[0.019s]   CMake did not find one.
+[0.019s] 
+[0.019s]   Could not find a package configuration file provided by "catkin" with any
+[0.019s]   of the following names:
+[0.019s] 
+[0.019s]     catkinConfig.cmake
+[0.020s]     catkin-config.cmake
+[0.020s] 
+[0.020s]   Add the installation prefix of "catkin" to CMAKE_PREFIX_PATH or set
+[0.020s]   "catkin_DIR" to a directory containing one of the above files.  If "catkin"
+[0.020s]   provides a separate development package or SDK, be sure it has been
+[0.020s]   installed.
+[0.020s] 
+[0.020s] [0m
+[0.020s] -- Configuring incomplete, errors occurred!
+[0.020s] See also "/home/sultan/ros2_ws/build/open3d_conversions/CMakeFiles/CMakeOutput.log".
+[0.118s] Invoked command in '/home/sultan/ros2_ws/build/open3d_conversions' returned '1': /usr/bin/cmake /home/sultan/ros2_ws/src/open3d_conversions -DCATKIN_INSTALL_INTO_PREFIX_ROOT=0 -DCMAKE_INSTALL_PREFIX=/home/sultan/ros2_ws/install/open3d_conversions

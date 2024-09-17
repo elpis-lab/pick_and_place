@@ -1,0 +1,186 @@
+[0.000000] (-) TimerEvent: {}
+[0.000155] (open3d_conversions) JobQueued: {'identifier': 'open3d_conversions', 'dependencies': OrderedDict()}
+[0.000169] (pick_and_place) JobQueued: {'identifier': 'pick_and_place', 'dependencies': OrderedDict()}
+[0.000178] (open3d_conversions) JobStarted: {'identifier': 'open3d_conversions'}
+[0.002481] (pick_and_place) JobStarted: {'identifier': 'pick_and_place'}
+[0.005106] (open3d_conversions) JobProgress: {'identifier': 'open3d_conversions', 'progress': 'cmake'}
+[0.005396] (open3d_conversions) Command: {'cmd': ['/usr/bin/cmake', '/home/sultan/ros2_ws/src/open3d_conversions', '-DCMAKE_INSTALL_PREFIX=/home/sultan/ros2_ws/install/open3d_conversions'], 'cwd': '/home/sultan/ros2_ws/build/open3d_conversions', 'env': OrderedDict([('LESSOPEN', '| /usr/bin/lesspipe %s'), ('USER', 'sultan'), ('XDG_SESSION_TYPE', 'x11'), ('SHLVL', '1'), ('LD_LIBRARY_PATH', '/opt/ros/humble/opt/rviz_ogre_vendor/lib:/opt/ros/humble/lib/x86_64-linux-gnu:/opt/ros/humble/lib'), ('HOME', '/home/sultan'), ('OLDPWD', '/home/sultan'), ('DESKTOP_SESSION', 'ubuntu'), ('ROS_PYTHON_VERSION', '3'), ('GNOME_SHELL_SESSION_MODE', 'ubuntu'), ('GTK_MODULES', 'gail:atk-bridge'), ('DBUS_STARTER_BUS_TYPE', 'session'), ('SYSTEMD_EXEC_PID', '3814806'), ('DBUS_SESSION_BUS_ADDRESS', 'unix:path=/run/user/1002/bus,guid=e930f529a8b6265f641ee3e8669fedc0'), ('COLORTERM', 'truecolor'), ('COLCON_PREFIX_PATH', '/home/sultan/ros2_ws/install'), ('ROS_DISTRO', 'humble'), ('GTK_IM_MODULE', 'ibus'), ('LOGNAME', 'sultan'), ('_', '/usr/bin/colcon'), ('ROS_VERSION', '2'), ('XDG_SESSION_CLASS', 'user'), ('USERNAME', 'sultan'), ('TERM', 'xterm-256color'), ('GNOME_DESKTOP_SESSION_ID', 'this-is-deprecated'), ('ROS_LOCALHOST_ONLY', '0'), ('WINDOWPATH', '3'), ('PATH', '/home/sultan/.local/bin:/opt/ros/humble/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin:/snap/bin'), ('SESSION_MANAGER', 'local/elpislab-4090:@/tmp/.ICE-unix/3814806,unix/elpislab-4090:/tmp/.ICE-unix/3814806'), ('XDG_MENU_PREFIX', 'gnome-'), ('GNOME_TERMINAL_SCREEN', '/org/gnome/Terminal/screen/9acf6786_a089_4015_8fec_86d620eab049'), ('XDG_RUNTIME_DIR', '/run/user/1002'), ('DISPLAY', ':2'), ('LANG', 'en_US.UTF-8'), ('XDG_CURRENT_DESKTOP', 'ubuntu:GNOME'), ('XMODIFIERS', '@im=ibus'), ('XDG_SESSION_DESKTOP', 'ubuntu'), ('XAUTHORITY', '/run/user/1002/gdm/Xauthority'), ('LS_COLORS', 'rs=0:di=01;34:ln=01;36:mh=00:pi=40;33:so=01;35:do=01;35:bd=40;33;01:cd=40;33;01:or=40;31;01:mi=00:su=37;41:sg=30;43:ca=30;41:tw=30;42:ow=34;42:st=37;44:ex=01;32:*.tar=01;31:*.tgz=01;31:*.arc=01;31:*.arj=01;31:*.taz=01;31:*.lha=01;31:*.lz4=01;31:*.lzh=01;31:*.lzma=01;31:*.tlz=01;31:*.txz=01;31:*.tzo=01;31:*.t7z=01;31:*.zip=01;31:*.z=01;31:*.dz=01;31:*.gz=01;31:*.lrz=01;31:*.lz=01;31:*.lzo=01;31:*.xz=01;31:*.zst=01;31:*.tzst=01;31:*.bz2=01;31:*.bz=01;31:*.tbz=01;31:*.tbz2=01;31:*.tz=01;31:*.deb=01;31:*.rpm=01;31:*.jar=01;31:*.war=01;31:*.ear=01;31:*.sar=01;31:*.rar=01;31:*.alz=01;31:*.ace=01;31:*.zoo=01;31:*.cpio=01;31:*.7z=01;31:*.rz=01;31:*.cab=01;31:*.wim=01;31:*.swm=01;31:*.dwm=01;31:*.esd=01;31:*.jpg=01;35:*.jpeg=01;35:*.mjpg=01;35:*.mjpeg=01;35:*.gif=01;35:*.bmp=01;35:*.pbm=01;35:*.pgm=01;35:*.ppm=01;35:*.tga=01;35:*.xbm=01;35:*.xpm=01;35:*.tif=01;35:*.tiff=01;35:*.png=01;35:*.svg=01;35:*.svgz=01;35:*.mng=01;35:*.pcx=01;35:*.mov=01;35:*.mpg=01;35:*.mpeg=01;35:*.m2v=01;35:*.mkv=01;35:*.webm=01;35:*.webp=01;35:*.ogm=01;35:*.mp4=01;35:*.m4v=01;35:*.mp4v=01;35:*.vob=01;35:*.qt=01;35:*.nuv=01;35:*.wmv=01;35:*.asf=01;35:*.rm=01;35:*.rmvb=01;35:*.flc=01;35:*.avi=01;35:*.fli=01;35:*.flv=01;35:*.gl=01;35:*.dl=01;35:*.xcf=01;35:*.xwd=01;35:*.yuv=01;35:*.cgm=01;35:*.emf=01;35:*.ogv=01;35:*.ogx=01;35:*.aac=00;36:*.au=00;36:*.flac=00;36:*.m4a=00;36:*.mid=00;36:*.midi=00;36:*.mka=00;36:*.mp3=00;36:*.mpc=00;36:*.ogg=00;36:*.ra=00;36:*.wav=00;36:*.oga=00;36:*.opus=00;36:*.spx=00;36:*.xspf=00;36:'), ('GNOME_TERMINAL_SERVICE', ':1.307'), ('SSH_AGENT_LAUNCHER', 'gnome-keyring'), ('SSH_AUTH_SOCK', '/run/user/1002/keyring/ssh'), ('AMENT_PREFIX_PATH', '/home/sultan/ros2_ws/install/pick_and_place:/opt/ros/humble'), ('SHELL', '/bin/bash'), ('QT_ACCESSIBILITY', '1'), ('GDMSESSION', 'ubuntu'), ('LESSCLOSE', '/usr/bin/lesspipe %s %s'), ('GPG_AGENT_INFO', '/run/user/1002/gnupg/S.gpg-agent:0:1'), ('QT_IM_MODULE', 'ibus'), ('PWD', '/home/sultan/ros2_ws/build/open3d_conversions'), ('LC_ALL', 'en_US.UTF-8'), ('XDG_CONFIG_DIRS', '/etc/xdg/xdg-ubuntu:/etc/xdg'), ('DBUS_STARTER_ADDRESS', 'unix:path=/run/user/1002/bus,guid=e930f529a8b6265f641ee3e8669fedc0'), ('XDG_DATA_DIRS', '/usr/share/ubuntu:/usr/share/gnome:/usr/local/share/:/usr/share/:/var/lib/snapd/desktop'), ('PYTHONPATH', '/home/sultan/ros2_ws/install/pick_and_place/lib/python3.10/site-packages:/opt/ros/humble/lib/python3.10/site-packages:/opt/ros/humble/local/lib/python3.10/dist-packages'), ('COLCON', '1'), ('VTE_VERSION', '6800'), ('CMAKE_PREFIX_PATH', '/home/sultan/ros2_ws/install/pick_and_place:/opt/ros/humble')]), 'shell': False}
+[0.011330] (open3d_conversions) StdoutLine: {'line': b'-- Found ament_cmake: 1.3.9 (/opt/ros/humble/share/ament_cmake/cmake)\n'}
+[0.099726] (-) TimerEvent: {}
+[0.107373] (open3d_conversions) StdoutLine: {'line': b'-- Found ament_cmake_ros: 0.10.0 (/opt/ros/humble/share/ament_cmake_ros/cmake)\n'}
+[0.108942] (open3d_conversions) StderrLine: {'line': b'\x1b[0mCMake Deprecation Warning at /home/sultan/open3d_install/lib/cmake/Open3D/Open3DConfig.cmake:18 (cmake_policy):\n'}
+[0.109009] (open3d_conversions) StderrLine: {'line': b'  The OLD behavior for policy CMP0072 will be removed from a future version\n'}
+[0.109037] (open3d_conversions) StderrLine: {'line': b'  of CMake.\n'}
+[0.109060] (open3d_conversions) StderrLine: {'line': b'\n'}
+[0.109089] (open3d_conversions) StderrLine: {'line': b'  The cmake-policies(7) manual explains that the OLD behaviors of all\n'}
+[0.109119] (open3d_conversions) StderrLine: {'line': b'  policies are deprecated and that a policy should be set to OLD only under\n'}
+[0.109140] (open3d_conversions) StderrLine: {'line': b'  specific short-term circumstances.  Projects should be ported to the NEW\n'}
+[0.109161] (open3d_conversions) StderrLine: {'line': b'  behavior and not rely on setting a policy to OLD.\n'}
+[0.109183] (open3d_conversions) StderrLine: {'line': b'Call Stack (most recent call first):\n'}
+[0.109203] (open3d_conversions) StderrLine: {'line': b'  CMakeLists.txt:15 (find_package)\n'}
+[0.109222] (open3d_conversions) StderrLine: {'line': b'\n'}
+[0.109242] (open3d_conversions) StderrLine: {'line': b'\x1b[0m\n'}
+[0.147265] (open3d_conversions) StdoutLine: {'line': b'-- Found Open3D: /home/sultan/open3d_install/lib/cmake/Open3D/Open3DConfig.cmake (found version "0.18.0")\n'}
+[0.149003] (open3d_conversions) StdoutLine: {'line': b'-- Found rclcpp: 16.0.9 (/opt/ros/humble/share/rclcpp/cmake)\n'}
+[0.171939] (open3d_conversions) StdoutLine: {'line': b'-- Found rosidl_generator_c: 3.1.5 (/opt/ros/humble/share/rosidl_generator_c/cmake)\n'}
+[0.174658] (open3d_conversions) StdoutLine: {'line': b'-- Found rosidl_adapter: 3.1.5 (/opt/ros/humble/share/rosidl_adapter/cmake)\n'}
+[0.179785] (open3d_conversions) StdoutLine: {'line': b'-- Found rosidl_generator_cpp: 3.1.5 (/opt/ros/humble/share/rosidl_generator_cpp/cmake)\n'}
+[0.188865] (open3d_conversions) StdoutLine: {'line': b'-- Using all available rosidl_typesupport_c: rosidl_typesupport_fastrtps_c;rosidl_typesupport_introspection_c\n'}
+[0.199777] (-) TimerEvent: {}
+[0.200204] (open3d_conversions) StdoutLine: {'line': b'-- Using all available rosidl_typesupport_cpp: rosidl_typesupport_fastrtps_cpp;rosidl_typesupport_introspection_cpp\n'}
+[0.240145] (open3d_conversions) StdoutLine: {'line': b'-- Found rmw_implementation_cmake: 6.1.2 (/opt/ros/humble/share/rmw_implementation_cmake/cmake)\n'}
+[0.241720] (open3d_conversions) StdoutLine: {'line': b'-- Found rmw_fastrtps_cpp: 6.2.6 (/opt/ros/humble/share/rmw_fastrtps_cpp/cmake)\n'}
+[0.252402] (pick_and_place) Command: {'cmd': ['/usr/bin/python3', '-W', 'ignore:setup.py install is deprecated', 'setup.py', 'egg_info', '--egg-base', '../../build/pick_and_place', 'build', '--build-base', '/home/sultan/ros2_ws/build/pick_and_place/build', 'install', '--record', '/home/sultan/ros2_ws/build/pick_and_place/install.log', '--single-version-externally-managed', 'install_data'], 'cwd': '/home/sultan/ros2_ws/src/pick_and_place', 'env': {'LESSOPEN': '| /usr/bin/lesspipe %s', 'USER': 'sultan', 'XDG_SESSION_TYPE': 'x11', 'SHLVL': '1', 'LD_LIBRARY_PATH': '/opt/ros/humble/opt/rviz_ogre_vendor/lib:/opt/ros/humble/lib/x86_64-linux-gnu:/opt/ros/humble/lib', 'HOME': '/home/sultan', 'OLDPWD': '/home/sultan', 'DESKTOP_SESSION': 'ubuntu', 'ROS_PYTHON_VERSION': '3', 'GNOME_SHELL_SESSION_MODE': 'ubuntu', 'GTK_MODULES': 'gail:atk-bridge', 'DBUS_STARTER_BUS_TYPE': 'session', 'SYSTEMD_EXEC_PID': '3814806', 'DBUS_SESSION_BUS_ADDRESS': 'unix:path=/run/user/1002/bus,guid=e930f529a8b6265f641ee3e8669fedc0', 'COLORTERM': 'truecolor', 'COLCON_PREFIX_PATH': '/home/sultan/ros2_ws/install', 'ROS_DISTRO': 'humble', 'GTK_IM_MODULE': 'ibus', 'LOGNAME': 'sultan', '_': '/usr/bin/colcon', 'ROS_VERSION': '2', 'XDG_SESSION_CLASS': 'user', 'USERNAME': 'sultan', 'TERM': 'xterm-256color', 'GNOME_DESKTOP_SESSION_ID': 'this-is-deprecated', 'ROS_LOCALHOST_ONLY': '0', 'WINDOWPATH': '3', 'PATH': '/home/sultan/.local/bin:/opt/ros/humble/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin:/snap/bin', 'SESSION_MANAGER': 'local/elpislab-4090:@/tmp/.ICE-unix/3814806,unix/elpislab-4090:/tmp/.ICE-unix/3814806', 'XDG_MENU_PREFIX': 'gnome-', 'GNOME_TERMINAL_SCREEN': '/org/gnome/Terminal/screen/9acf6786_a089_4015_8fec_86d620eab049', 'XDG_RUNTIME_DIR': '/run/user/1002', 'DISPLAY': ':2', 'LANG': 'en_US.UTF-8', 'XDG_CURRENT_DESKTOP': 'ubuntu:GNOME', 'XMODIFIERS': '@im=ibus', 'XDG_SESSION_DESKTOP': 'ubuntu', 'XAUTHORITY': '/run/user/1002/gdm/Xauthority', 'LS_COLORS': 'rs=0:di=01;34:ln=01;36:mh=00:pi=40;33:so=01;35:do=01;35:bd=40;33;01:cd=40;33;01:or=40;31;01:mi=00:su=37;41:sg=30;43:ca=30;41:tw=30;42:ow=34;42:st=37;44:ex=01;32:*.tar=01;31:*.tgz=01;31:*.arc=01;31:*.arj=01;31:*.taz=01;31:*.lha=01;31:*.lz4=01;31:*.lzh=01;31:*.lzma=01;31:*.tlz=01;31:*.txz=01;31:*.tzo=01;31:*.t7z=01;31:*.zip=01;31:*.z=01;31:*.dz=01;31:*.gz=01;31:*.lrz=01;31:*.lz=01;31:*.lzo=01;31:*.xz=01;31:*.zst=01;31:*.tzst=01;31:*.bz2=01;31:*.bz=01;31:*.tbz=01;31:*.tbz2=01;31:*.tz=01;31:*.deb=01;31:*.rpm=01;31:*.jar=01;31:*.war=01;31:*.ear=01;31:*.sar=01;31:*.rar=01;31:*.alz=01;31:*.ace=01;31:*.zoo=01;31:*.cpio=01;31:*.7z=01;31:*.rz=01;31:*.cab=01;31:*.wim=01;31:*.swm=01;31:*.dwm=01;31:*.esd=01;31:*.jpg=01;35:*.jpeg=01;35:*.mjpg=01;35:*.mjpeg=01;35:*.gif=01;35:*.bmp=01;35:*.pbm=01;35:*.pgm=01;35:*.ppm=01;35:*.tga=01;35:*.xbm=01;35:*.xpm=01;35:*.tif=01;35:*.tiff=01;35:*.png=01;35:*.svg=01;35:*.svgz=01;35:*.mng=01;35:*.pcx=01;35:*.mov=01;35:*.mpg=01;35:*.mpeg=01;35:*.m2v=01;35:*.mkv=01;35:*.webm=01;35:*.webp=01;35:*.ogm=01;35:*.mp4=01;35:*.m4v=01;35:*.mp4v=01;35:*.vob=01;35:*.qt=01;35:*.nuv=01;35:*.wmv=01;35:*.asf=01;35:*.rm=01;35:*.rmvb=01;35:*.flc=01;35:*.avi=01;35:*.fli=01;35:*.flv=01;35:*.gl=01;35:*.dl=01;35:*.xcf=01;35:*.xwd=01;35:*.yuv=01;35:*.cgm=01;35:*.emf=01;35:*.ogv=01;35:*.ogx=01;35:*.aac=00;36:*.au=00;36:*.flac=00;36:*.m4a=00;36:*.mid=00;36:*.midi=00;36:*.mka=00;36:*.mp3=00;36:*.mpc=00;36:*.ogg=00;36:*.ra=00;36:*.wav=00;36:*.oga=00;36:*.opus=00;36:*.spx=00;36:*.xspf=00;36:', 'GNOME_TERMINAL_SERVICE': ':1.307', 'SSH_AGENT_LAUNCHER': 'gnome-keyring', 'SSH_AUTH_SOCK': '/run/user/1002/keyring/ssh', 'AMENT_PREFIX_PATH': '/home/sultan/ros2_ws/install/pick_and_place:/opt/ros/humble', 'SHELL': '/bin/bash', 'QT_ACCESSIBILITY': '1', 'GDMSESSION': 'ubuntu', 'LESSCLOSE': '/usr/bin/lesspipe %s %s', 'GPG_AGENT_INFO': '/run/user/1002/gnupg/S.gpg-agent:0:1', 'QT_IM_MODULE': 'ibus', 'PWD': '/home/sultan/ros2_ws/build/pick_and_place', 'LC_ALL': 'en_US.UTF-8', 'XDG_CONFIG_DIRS': '/etc/xdg/xdg-ubuntu:/etc/xdg', 'DBUS_STARTER_ADDRESS': 'unix:path=/run/user/1002/bus,guid=e930f529a8b6265f641ee3e8669fedc0', 'XDG_DATA_DIRS': '/usr/share/ubuntu:/usr/share/gnome:/usr/local/share/:/usr/share/:/var/lib/snapd/desktop', 'PYTHONPATH': '/home/sultan/ros2_ws/build/pick_and_place/prefix_override:/usr/lib/python3/dist-packages/colcon_core/task/python/colcon_distutils_commands:/home/sultan/ros2_ws/install/pick_and_place/lib/python3.10/site-packages:/home/sultan/ros2_ws/install/pick_and_place/lib/python3.10/site-packages:/opt/ros/humble/lib/python3.10/site-packages:/opt/ros/humble/local/lib/python3.10/dist-packages', 'COLCON': '1', 'VTE_VERSION': '6800'}, 'shell': False}
+[0.287652] (open3d_conversions) StdoutLine: {'line': b'-- Found OpenSSL: /usr/lib/x86_64-linux-gnu/libcrypto.so (found version "3.0.2")\n'}
+[0.299939] (-) TimerEvent: {}
+[0.300259] (open3d_conversions) StdoutLine: {'line': b'-- Found FastRTPS: /opt/ros/humble/include\n'}
+[0.323348] (open3d_conversions) StdoutLine: {'line': b"-- Using RMW implementation 'rmw_fastrtps_cpp' as default\n"}
+[0.353448] (pick_and_place) StdoutLine: {'line': b'running egg_info\n'}
+[0.353655] (pick_and_place) StdoutLine: {'line': b'writing ../../build/pick_and_place/pick_and_place.egg-info/PKG-INFO\n'}
+[0.353876] (pick_and_place) StdoutLine: {'line': b'writing dependency_links to ../../build/pick_and_place/pick_and_place.egg-info/dependency_links.txt\n'}
+[0.353932] (pick_and_place) StdoutLine: {'line': b'writing entry points to ../../build/pick_and_place/pick_and_place.egg-info/entry_points.txt\n'}
+[0.353959] (pick_and_place) StdoutLine: {'line': b'writing requirements to ../../build/pick_and_place/pick_and_place.egg-info/requires.txt\n'}
+[0.353982] (pick_and_place) StdoutLine: {'line': b'writing top-level names to ../../build/pick_and_place/pick_and_place.egg-info/top_level.txt\n'}
+[0.354716] (pick_and_place) StdoutLine: {'line': b"reading manifest file '../../build/pick_and_place/pick_and_place.egg-info/SOURCES.txt'\n"}
+[0.355039] (pick_and_place) StdoutLine: {'line': b"adding license file 'LICENSE'\n"}
+[0.355335] (pick_and_place) StdoutLine: {'line': b"writing manifest file '../../build/pick_and_place/pick_and_place.egg-info/SOURCES.txt'\n"}
+[0.355390] (pick_and_place) StdoutLine: {'line': b'running build\n'}
+[0.355418] (pick_and_place) StdoutLine: {'line': b'running build_py\n'}
+[0.355823] (pick_and_place) StdoutLine: {'line': b'running install\n'}
+[0.355973] (pick_and_place) StdoutLine: {'line': b'running install_lib\n'}
+[0.356565] (pick_and_place) StdoutLine: {'line': b'running install_data\n'}
+[0.356670] (pick_and_place) StdoutLine: {'line': b'running install_egg_info\n'}
+[0.357355] (pick_and_place) StdoutLine: {'line': b"removing '/home/sultan/ros2_ws/install/pick_and_place/lib/python3.10/site-packages/pick_and_place-0.0.0-py3.10.egg-info' (and everything under it)\n"}
+[0.357466] (pick_and_place) StdoutLine: {'line': b'Copying ../../build/pick_and_place/pick_and_place.egg-info to /home/sultan/ros2_ws/install/pick_and_place/lib/python3.10/site-packages/pick_and_place-0.0.0-py3.10.egg-info\n'}
+[0.357968] (pick_and_place) StdoutLine: {'line': b'running install_scripts\n'}
+[0.366946] (pick_and_place) StdoutLine: {'line': b'Installing edge_grasp script to /home/sultan/ros2_ws/install/pick_and_place/lib/pick_and_place\n'}
+[0.367000] (pick_and_place) StdoutLine: {'line': b'Installing pc_subscriber script to /home/sultan/ros2_ws/install/pick_and_place/lib/pick_and_place\n'}
+[0.367036] (pick_and_place) StdoutLine: {'line': b"writing list of installed files to '/home/sultan/ros2_ws/build/pick_and_place/install.log'\n"}
+[0.376688] (pick_and_place) CommandEnded: {'returncode': 0}
+[0.381437] (pick_and_place) JobEnded: {'identifier': 'pick_and_place', 'rc': 0}
+[0.400035] (-) TimerEvent: {}
+[0.415879] (open3d_conversions) StdoutLine: {'line': b'-- Found sensor_msgs: 4.2.4 (/opt/ros/humble/share/sensor_msgs/cmake)\n'}
+[0.484349] (open3d_conversions) StdoutLine: {'line': b'-- Found ament_lint_auto: 0.12.11 (/opt/ros/humble/share/ament_lint_auto/cmake)\n'}
+[0.485519] (open3d_conversions) StdoutLine: {'line': b"-- Found gtest sources under '/opt/ros/humble/src/gtest_vendor': C++ tests using 'Google Test' will be built\n"}
+[0.500187] (-) TimerEvent: {}
+[0.527337] (open3d_conversions) StdoutLine: {'line': b"-- Added test 'copyright' to check source files copyright and LICENSE\n"}
+[0.527829] (open3d_conversions) StdoutLine: {'line': b"-- Added test 'cppcheck' to perform static code analysis on C / C++ code\n"}
+[0.528010] (open3d_conversions) StdoutLine: {'line': b'-- Configured cppcheck include dirs: /home/sultan/ros2_ws/src/open3d_conversions/include;$<BUILD_INTERFACE:/home/sultan/ros2_ws/src/open3d_conversions/include>\n'}
+[0.528072] (open3d_conversions) StdoutLine: {'line': b'-- Configured cppcheck exclude dirs and/or files: \n'}
+[0.528514] (open3d_conversions) StdoutLine: {'line': b"-- Added test 'cpplint' to check C / C++ code against the Google style\n"}
+[0.528573] (open3d_conversions) StdoutLine: {'line': b'-- Configured cpplint exclude dirs and/or files: \n'}
+[0.528871] (open3d_conversions) StdoutLine: {'line': b"-- Added test 'lint_cmake' to check CMake code style\n"}
+[0.529521] (open3d_conversions) StdoutLine: {'line': b"-- Added test 'uncrustify' to check C / C++ code style\n"}
+[0.529575] (open3d_conversions) StdoutLine: {'line': b'-- Configured uncrustify additional arguments: \n'}
+[0.529818] (open3d_conversions) StdoutLine: {'line': b"-- Added test 'xmllint' to check XML markup files\n"}
+[0.531780] (open3d_conversions) StdoutLine: {'line': b'-- Configuring done (0.5s)\n'}
+[0.541190] (open3d_conversions) StdoutLine: {'line': b'-- Generating done (0.0s)\n'}
+[0.542053] (open3d_conversions) StdoutLine: {'line': b'-- Build files have been written to: /home/sultan/ros2_ws/build/open3d_conversions\n'}
+[0.546716] (open3d_conversions) CommandEnded: {'returncode': 0}
+[0.547208] (open3d_conversions) JobProgress: {'identifier': 'open3d_conversions', 'progress': 'build'}
+[0.547220] (open3d_conversions) Command: {'cmd': ['/usr/bin/cmake', '--build', '/home/sultan/ros2_ws/build/open3d_conversions', '--', '-j28', '-l28'], 'cwd': '/home/sultan/ros2_ws/build/open3d_conversions', 'env': OrderedDict([('LESSOPEN', '| /usr/bin/lesspipe %s'), ('USER', 'sultan'), ('XDG_SESSION_TYPE', 'x11'), ('SHLVL', '1'), ('LD_LIBRARY_PATH', '/opt/ros/humble/opt/rviz_ogre_vendor/lib:/opt/ros/humble/lib/x86_64-linux-gnu:/opt/ros/humble/lib'), ('HOME', '/home/sultan'), ('OLDPWD', '/home/sultan'), ('DESKTOP_SESSION', 'ubuntu'), ('ROS_PYTHON_VERSION', '3'), ('GNOME_SHELL_SESSION_MODE', 'ubuntu'), ('GTK_MODULES', 'gail:atk-bridge'), ('DBUS_STARTER_BUS_TYPE', 'session'), ('SYSTEMD_EXEC_PID', '3814806'), ('DBUS_SESSION_BUS_ADDRESS', 'unix:path=/run/user/1002/bus,guid=e930f529a8b6265f641ee3e8669fedc0'), ('COLORTERM', 'truecolor'), ('COLCON_PREFIX_PATH', '/home/sultan/ros2_ws/install'), ('ROS_DISTRO', 'humble'), ('GTK_IM_MODULE', 'ibus'), ('LOGNAME', 'sultan'), ('_', '/usr/bin/colcon'), ('ROS_VERSION', '2'), ('XDG_SESSION_CLASS', 'user'), ('USERNAME', 'sultan'), ('TERM', 'xterm-256color'), ('GNOME_DESKTOP_SESSION_ID', 'this-is-deprecated'), ('ROS_LOCALHOST_ONLY', '0'), ('WINDOWPATH', '3'), ('PATH', '/home/sultan/.local/bin:/opt/ros/humble/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin:/snap/bin'), ('SESSION_MANAGER', 'local/elpislab-4090:@/tmp/.ICE-unix/3814806,unix/elpislab-4090:/tmp/.ICE-unix/3814806'), ('XDG_MENU_PREFIX', 'gnome-'), ('GNOME_TERMINAL_SCREEN', '/org/gnome/Terminal/screen/9acf6786_a089_4015_8fec_86d620eab049'), ('XDG_RUNTIME_DIR', '/run/user/1002'), ('DISPLAY', ':2'), ('LANG', 'en_US.UTF-8'), ('XDG_CURRENT_DESKTOP', 'ubuntu:GNOME'), ('XMODIFIERS', '@im=ibus'), ('XDG_SESSION_DESKTOP', 'ubuntu'), ('XAUTHORITY', '/run/user/1002/gdm/Xauthority'), ('LS_COLORS', 'rs=0:di=01;34:ln=01;36:mh=00:pi=40;33:so=01;35:do=01;35:bd=40;33;01:cd=40;33;01:or=40;31;01:mi=00:su=37;41:sg=30;43:ca=30;41:tw=30;42:ow=34;42:st=37;44:ex=01;32:*.tar=01;31:*.tgz=01;31:*.arc=01;31:*.arj=01;31:*.taz=01;31:*.lha=01;31:*.lz4=01;31:*.lzh=01;31:*.lzma=01;31:*.tlz=01;31:*.txz=01;31:*.tzo=01;31:*.t7z=01;31:*.zip=01;31:*.z=01;31:*.dz=01;31:*.gz=01;31:*.lrz=01;31:*.lz=01;31:*.lzo=01;31:*.xz=01;31:*.zst=01;31:*.tzst=01;31:*.bz2=01;31:*.bz=01;31:*.tbz=01;31:*.tbz2=01;31:*.tz=01;31:*.deb=01;31:*.rpm=01;31:*.jar=01;31:*.war=01;31:*.ear=01;31:*.sar=01;31:*.rar=01;31:*.alz=01;31:*.ace=01;31:*.zoo=01;31:*.cpio=01;31:*.7z=01;31:*.rz=01;31:*.cab=01;31:*.wim=01;31:*.swm=01;31:*.dwm=01;31:*.esd=01;31:*.jpg=01;35:*.jpeg=01;35:*.mjpg=01;35:*.mjpeg=01;35:*.gif=01;35:*.bmp=01;35:*.pbm=01;35:*.pgm=01;35:*.ppm=01;35:*.tga=01;35:*.xbm=01;35:*.xpm=01;35:*.tif=01;35:*.tiff=01;35:*.png=01;35:*.svg=01;35:*.svgz=01;35:*.mng=01;35:*.pcx=01;35:*.mov=01;35:*.mpg=01;35:*.mpeg=01;35:*.m2v=01;35:*.mkv=01;35:*.webm=01;35:*.webp=01;35:*.ogm=01;35:*.mp4=01;35:*.m4v=01;35:*.mp4v=01;35:*.vob=01;35:*.qt=01;35:*.nuv=01;35:*.wmv=01;35:*.asf=01;35:*.rm=01;35:*.rmvb=01;35:*.flc=01;35:*.avi=01;35:*.fli=01;35:*.flv=01;35:*.gl=01;35:*.dl=01;35:*.xcf=01;35:*.xwd=01;35:*.yuv=01;35:*.cgm=01;35:*.emf=01;35:*.ogv=01;35:*.ogx=01;35:*.aac=00;36:*.au=00;36:*.flac=00;36:*.m4a=00;36:*.mid=00;36:*.midi=00;36:*.mka=00;36:*.mp3=00;36:*.mpc=00;36:*.ogg=00;36:*.ra=00;36:*.wav=00;36:*.oga=00;36:*.opus=00;36:*.spx=00;36:*.xspf=00;36:'), ('GNOME_TERMINAL_SERVICE', ':1.307'), ('SSH_AGENT_LAUNCHER', 'gnome-keyring'), ('SSH_AUTH_SOCK', '/run/user/1002/keyring/ssh'), ('AMENT_PREFIX_PATH', '/home/sultan/ros2_ws/install/pick_and_place:/opt/ros/humble'), ('SHELL', '/bin/bash'), ('QT_ACCESSIBILITY', '1'), ('GDMSESSION', 'ubuntu'), ('LESSCLOSE', '/usr/bin/lesspipe %s %s'), ('GPG_AGENT_INFO', '/run/user/1002/gnupg/S.gpg-agent:0:1'), ('QT_IM_MODULE', 'ibus'), ('PWD', '/home/sultan/ros2_ws/build/open3d_conversions'), ('LC_ALL', 'en_US.UTF-8'), ('XDG_CONFIG_DIRS', '/etc/xdg/xdg-ubuntu:/etc/xdg'), ('DBUS_STARTER_ADDRESS', 'unix:path=/run/user/1002/bus,guid=e930f529a8b6265f641ee3e8669fedc0'), ('XDG_DATA_DIRS', '/usr/share/ubuntu:/usr/share/gnome:/usr/local/share/:/usr/share/:/var/lib/snapd/desktop'), ('PYTHONPATH', '/home/sultan/ros2_ws/install/pick_and_place/lib/python3.10/site-packages:/opt/ros/humble/lib/python3.10/site-packages:/opt/ros/humble/local/lib/python3.10/dist-packages'), ('COLCON', '1'), ('VTE_VERSION', '6800'), ('CMAKE_PREFIX_PATH', '/home/sultan/ros2_ws/install/pick_and_place:/opt/ros/humble')]), 'shell': False}
+[0.560714] (open3d_conversions) StdoutLine: {'line': b'[ 12%] \x1b[32mBuilding CXX object gtest/CMakeFiles/gtest_main.dir/src/gtest_main.cc.o\x1b[0m\n'}
+[0.560823] (open3d_conversions) StdoutLine: {'line': b'[ 25%] \x1b[32mBuilding CXX object CMakeFiles/open3d_conversions.dir/src/open3d_conversions.cpp.o\x1b[0m\n'}
+[0.560869] (open3d_conversions) StdoutLine: {'line': b'[ 37%] \x1b[32mBuilding CXX object gtest/CMakeFiles/gtest.dir/src/gtest-all.cc.o\x1b[0m\n'}
+[0.600325] (-) TimerEvent: {}
+[0.700633] (-) TimerEvent: {}
+[0.800936] (-) TimerEvent: {}
+[0.817531] (open3d_conversions) StdoutLine: {'line': b'[ 50%] \x1b[32m\x1b[1mLinking CXX static library libgtest_main.a\x1b[0m\n'}
+[0.840064] (open3d_conversions) StdoutLine: {'line': b'[ 50%] Built target gtest_main\n'}
+[0.901124] (-) TimerEvent: {}
+[1.001418] (-) TimerEvent: {}
+[1.101718] (-) TimerEvent: {}
+[1.202013] (-) TimerEvent: {}
+[1.302299] (-) TimerEvent: {}
+[1.402598] (-) TimerEvent: {}
+[1.502918] (-) TimerEvent: {}
+[1.603220] (-) TimerEvent: {}
+[1.703515] (-) TimerEvent: {}
+[1.793233] (open3d_conversions) StdoutLine: {'line': b'[ 62%] \x1b[32m\x1b[1mLinking CXX static library libgtest.a\x1b[0m\n'}
+[1.803678] (-) TimerEvent: {}
+[1.829686] (open3d_conversions) StdoutLine: {'line': b'[ 62%] Built target gtest\n'}
+[1.903848] (-) TimerEvent: {}
+[2.004149] (-) TimerEvent: {}
+[2.104461] (-) TimerEvent: {}
+[2.204814] (-) TimerEvent: {}
+[2.305128] (-) TimerEvent: {}
+[2.405500] (-) TimerEvent: {}
+[2.502868] (open3d_conversions) StdoutLine: {'line': b'[ 75%] \x1b[32m\x1b[1mLinking CXX shared library libopen3d_conversions.so\x1b[0m\n'}
+[2.505584] (-) TimerEvent: {}
+[2.604797] (open3d_conversions) StdoutLine: {'line': b'[ 75%] Built target open3d_conversions\n'}
+[2.605648] (-) TimerEvent: {}
+[2.610530] (open3d_conversions) StdoutLine: {'line': b'[ 87%] \x1b[32mBuilding CXX object CMakeFiles/test_open3d_conversions.dir/test/test_open3d_conversions.cpp.o\x1b[0m\n'}
+[2.705831] (-) TimerEvent: {}
+[2.806030] (-) TimerEvent: {}
+[2.906320] (-) TimerEvent: {}
+[3.006625] (-) TimerEvent: {}
+[3.106970] (-) TimerEvent: {}
+[3.207288] (-) TimerEvent: {}
+[3.307573] (-) TimerEvent: {}
+[3.407880] (-) TimerEvent: {}
+[3.508204] (-) TimerEvent: {}
+[3.608526] (-) TimerEvent: {}
+[3.708832] (-) TimerEvent: {}
+[3.809151] (-) TimerEvent: {}
+[3.909483] (-) TimerEvent: {}
+[4.009808] (-) TimerEvent: {}
+[4.110152] (-) TimerEvent: {}
+[4.210479] (-) TimerEvent: {}
+[4.310789] (-) TimerEvent: {}
+[4.411099] (-) TimerEvent: {}
+[4.511435] (-) TimerEvent: {}
+[4.611741] (-) TimerEvent: {}
+[4.712063] (-) TimerEvent: {}
+[4.812380] (-) TimerEvent: {}
+[4.912711] (-) TimerEvent: {}
+[5.013045] (-) TimerEvent: {}
+[5.113409] (-) TimerEvent: {}
+[5.213664] (-) TimerEvent: {}
+[5.314006] (-) TimerEvent: {}
+[5.414322] (-) TimerEvent: {}
+[5.514635] (-) TimerEvent: {}
+[5.614959] (-) TimerEvent: {}
+[5.715301] (-) TimerEvent: {}
+[5.815638] (-) TimerEvent: {}
+[5.915936] (-) TimerEvent: {}
+[5.991850] (open3d_conversions) StdoutLine: {'line': b'[100%] \x1b[32m\x1b[1mLinking CXX executable test_open3d_conversions\x1b[0m\n'}
+[6.016034] (-) TimerEvent: {}
+[6.116275] (-) TimerEvent: {}
+[6.199026] (open3d_conversions) StdoutLine: {'line': b'[100%] Built target test_open3d_conversions\n'}
+[6.210235] (open3d_conversions) CommandEnded: {'returncode': 0}
+[6.216434] (-) TimerEvent: {}
+[6.220923] (open3d_conversions) JobProgress: {'identifier': 'open3d_conversions', 'progress': 'install'}
+[6.223010] (open3d_conversions) Command: {'cmd': ['/usr/bin/cmake', '--install', '/home/sultan/ros2_ws/build/open3d_conversions'], 'cwd': '/home/sultan/ros2_ws/build/open3d_conversions', 'env': OrderedDict([('LESSOPEN', '| /usr/bin/lesspipe %s'), ('USER', 'sultan'), ('XDG_SESSION_TYPE', 'x11'), ('SHLVL', '1'), ('LD_LIBRARY_PATH', '/opt/ros/humble/opt/rviz_ogre_vendor/lib:/opt/ros/humble/lib/x86_64-linux-gnu:/opt/ros/humble/lib'), ('HOME', '/home/sultan'), ('OLDPWD', '/home/sultan'), ('DESKTOP_SESSION', 'ubuntu'), ('ROS_PYTHON_VERSION', '3'), ('GNOME_SHELL_SESSION_MODE', 'ubuntu'), ('GTK_MODULES', 'gail:atk-bridge'), ('DBUS_STARTER_BUS_TYPE', 'session'), ('SYSTEMD_EXEC_PID', '3814806'), ('DBUS_SESSION_BUS_ADDRESS', 'unix:path=/run/user/1002/bus,guid=e930f529a8b6265f641ee3e8669fedc0'), ('COLORTERM', 'truecolor'), ('COLCON_PREFIX_PATH', '/home/sultan/ros2_ws/install'), ('ROS_DISTRO', 'humble'), ('GTK_IM_MODULE', 'ibus'), ('LOGNAME', 'sultan'), ('_', '/usr/bin/colcon'), ('ROS_VERSION', '2'), ('XDG_SESSION_CLASS', 'user'), ('USERNAME', 'sultan'), ('TERM', 'xterm-256color'), ('GNOME_DESKTOP_SESSION_ID', 'this-is-deprecated'), ('ROS_LOCALHOST_ONLY', '0'), ('WINDOWPATH', '3'), ('PATH', '/home/sultan/.local/bin:/opt/ros/humble/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin:/snap/bin'), ('SESSION_MANAGER', 'local/elpislab-4090:@/tmp/.ICE-unix/3814806,unix/elpislab-4090:/tmp/.ICE-unix/3814806'), ('XDG_MENU_PREFIX', 'gnome-'), ('GNOME_TERMINAL_SCREEN', '/org/gnome/Terminal/screen/9acf6786_a089_4015_8fec_86d620eab049'), ('XDG_RUNTIME_DIR', '/run/user/1002'), ('DISPLAY', ':2'), ('LANG', 'en_US.UTF-8'), ('XDG_CURRENT_DESKTOP', 'ubuntu:GNOME'), ('XMODIFIERS', '@im=ibus'), ('XDG_SESSION_DESKTOP', 'ubuntu'), ('XAUTHORITY', '/run/user/1002/gdm/Xauthority'), ('LS_COLORS', 'rs=0:di=01;34:ln=01;36:mh=00:pi=40;33:so=01;35:do=01;35:bd=40;33;01:cd=40;33;01:or=40;31;01:mi=00:su=37;41:sg=30;43:ca=30;41:tw=30;42:ow=34;42:st=37;44:ex=01;32:*.tar=01;31:*.tgz=01;31:*.arc=01;31:*.arj=01;31:*.taz=01;31:*.lha=01;31:*.lz4=01;31:*.lzh=01;31:*.lzma=01;31:*.tlz=01;31:*.txz=01;31:*.tzo=01;31:*.t7z=01;31:*.zip=01;31:*.z=01;31:*.dz=01;31:*.gz=01;31:*.lrz=01;31:*.lz=01;31:*.lzo=01;31:*.xz=01;31:*.zst=01;31:*.tzst=01;31:*.bz2=01;31:*.bz=01;31:*.tbz=01;31:*.tbz2=01;31:*.tz=01;31:*.deb=01;31:*.rpm=01;31:*.jar=01;31:*.war=01;31:*.ear=01;31:*.sar=01;31:*.rar=01;31:*.alz=01;31:*.ace=01;31:*.zoo=01;31:*.cpio=01;31:*.7z=01;31:*.rz=01;31:*.cab=01;31:*.wim=01;31:*.swm=01;31:*.dwm=01;31:*.esd=01;31:*.jpg=01;35:*.jpeg=01;35:*.mjpg=01;35:*.mjpeg=01;35:*.gif=01;35:*.bmp=01;35:*.pbm=01;35:*.pgm=01;35:*.ppm=01;35:*.tga=01;35:*.xbm=01;35:*.xpm=01;35:*.tif=01;35:*.tiff=01;35:*.png=01;35:*.svg=01;35:*.svgz=01;35:*.mng=01;35:*.pcx=01;35:*.mov=01;35:*.mpg=01;35:*.mpeg=01;35:*.m2v=01;35:*.mkv=01;35:*.webm=01;35:*.webp=01;35:*.ogm=01;35:*.mp4=01;35:*.m4v=01;35:*.mp4v=01;35:*.vob=01;35:*.qt=01;35:*.nuv=01;35:*.wmv=01;35:*.asf=01;35:*.rm=01;35:*.rmvb=01;35:*.flc=01;35:*.avi=01;35:*.fli=01;35:*.flv=01;35:*.gl=01;35:*.dl=01;35:*.xcf=01;35:*.xwd=01;35:*.yuv=01;35:*.cgm=01;35:*.emf=01;35:*.ogv=01;35:*.ogx=01;35:*.aac=00;36:*.au=00;36:*.flac=00;36:*.m4a=00;36:*.mid=00;36:*.midi=00;36:*.mka=00;36:*.mp3=00;36:*.mpc=00;36:*.ogg=00;36:*.ra=00;36:*.wav=00;36:*.oga=00;36:*.opus=00;36:*.spx=00;36:*.xspf=00;36:'), ('GNOME_TERMINAL_SERVICE', ':1.307'), ('SSH_AGENT_LAUNCHER', 'gnome-keyring'), ('SSH_AUTH_SOCK', '/run/user/1002/keyring/ssh'), ('AMENT_PREFIX_PATH', '/home/sultan/ros2_ws/install/pick_and_place:/opt/ros/humble'), ('SHELL', '/bin/bash'), ('QT_ACCESSIBILITY', '1'), ('GDMSESSION', 'ubuntu'), ('LESSCLOSE', '/usr/bin/lesspipe %s %s'), ('GPG_AGENT_INFO', '/run/user/1002/gnupg/S.gpg-agent:0:1'), ('QT_IM_MODULE', 'ibus'), ('PWD', '/home/sultan/ros2_ws/build/open3d_conversions'), ('LC_ALL', 'en_US.UTF-8'), ('XDG_CONFIG_DIRS', '/etc/xdg/xdg-ubuntu:/etc/xdg'), ('DBUS_STARTER_ADDRESS', 'unix:path=/run/user/1002/bus,guid=e930f529a8b6265f641ee3e8669fedc0'), ('XDG_DATA_DIRS', '/usr/share/ubuntu:/usr/share/gnome:/usr/local/share/:/usr/share/:/var/lib/snapd/desktop'), ('PYTHONPATH', '/home/sultan/ros2_ws/install/pick_and_place/lib/python3.10/site-packages:/opt/ros/humble/lib/python3.10/site-packages:/opt/ros/humble/local/lib/python3.10/dist-packages'), ('COLCON', '1'), ('VTE_VERSION', '6800'), ('CMAKE_PREFIX_PATH', '/home/sultan/ros2_ws/install/pick_and_place:/opt/ros/humble')]), 'shell': False}
+[6.224736] (open3d_conversions) StdoutLine: {'line': b'-- Install configuration: ""\n'}
+[6.224800] (open3d_conversions) StdoutLine: {'line': b'-- Installing: /home/sultan/ros2_ws/install/open3d_conversions/include\n'}
+[6.224854] (open3d_conversions) StdoutLine: {'line': b'-- Installing: /home/sultan/ros2_ws/install/open3d_conversions/include/open3d_conversions\n'}
+[6.224887] (open3d_conversions) StdoutLine: {'line': b'-- Installing: /home/sultan/ros2_ws/install/open3d_conversions/include/open3d_conversions/visibility_control.h\n'}
+[6.224977] (open3d_conversions) StdoutLine: {'line': b'-- Installing: /home/sultan/ros2_ws/install/open3d_conversions/include/open3d_conversions/open3d_conversions.hpp\n'}
+[6.225065] (open3d_conversions) StdoutLine: {'line': b'-- Installing: /home/sultan/ros2_ws/install/open3d_conversions/lib/libopen3d_conversions.so\n'}
+[6.225377] (open3d_conversions) StdoutLine: {'line': b'-- Set non-toolchain portion of runtime path of "/home/sultan/ros2_ws/install/open3d_conversions/lib/libopen3d_conversions.so" to ""\n'}
+[6.225442] (open3d_conversions) StdoutLine: {'line': b'-- Installing: /home/sultan/ros2_ws/install/open3d_conversions/share/open3d_conversions/environment/library_path.sh\n'}
+[6.225503] (open3d_conversions) StdoutLine: {'line': b'-- Installing: /home/sultan/ros2_ws/install/open3d_conversions/share/open3d_conversions/environment/library_path.dsv\n'}
+[6.225587] (open3d_conversions) StdoutLine: {'line': b'-- Installing: /home/sultan/ros2_ws/install/open3d_conversions/share/ament_index/resource_index/package_run_dependencies/open3d_conversions\n'}
+[6.225656] (open3d_conversions) StdoutLine: {'line': b'-- Installing: /home/sultan/ros2_ws/install/open3d_conversions/share/ament_index/resource_index/parent_prefix_path/open3d_conversions\n'}
+[6.225705] (open3d_conversions) StdoutLine: {'line': b'-- Installing: /home/sultan/ros2_ws/install/open3d_conversions/share/open3d_conversions/environment/ament_prefix_path.sh\n'}
+[6.225751] (open3d_conversions) StdoutLine: {'line': b'-- Installing: /home/sultan/ros2_ws/install/open3d_conversions/share/open3d_conversions/environment/ament_prefix_path.dsv\n'}
+[6.225807] (open3d_conversions) StdoutLine: {'line': b'-- Installing: /home/sultan/ros2_ws/install/open3d_conversions/share/open3d_conversions/environment/path.sh\n'}
+[6.225853] (open3d_conversions) StdoutLine: {'line': b'-- Installing: /home/sultan/ros2_ws/install/open3d_conversions/share/open3d_conversions/environment/path.dsv\n'}
+[6.225903] (open3d_conversions) StdoutLine: {'line': b'-- Installing: /home/sultan/ros2_ws/install/open3d_conversions/share/open3d_conversions/local_setup.bash\n'}
+[6.225955] (open3d_conversions) StdoutLine: {'line': b'-- Installing: /home/sultan/ros2_ws/install/open3d_conversions/share/open3d_conversions/local_setup.sh\n'}
+[6.226006] (open3d_conversions) StdoutLine: {'line': b'-- Installing: /home/sultan/ros2_ws/install/open3d_conversions/share/open3d_conversions/local_setup.zsh\n'}
+[6.226054] (open3d_conversions) StdoutLine: {'line': b'-- Installing: /home/sultan/ros2_ws/install/open3d_conversions/share/open3d_conversions/local_setup.dsv\n'}
+[6.226102] (open3d_conversions) StdoutLine: {'line': b'-- Installing: /home/sultan/ros2_ws/install/open3d_conversions/share/open3d_conversions/package.dsv\n'}
+[6.226171] (open3d_conversions) StdoutLine: {'line': b'-- Installing: /home/sultan/ros2_ws/install/open3d_conversions/share/ament_index/resource_index/packages/open3d_conversions\n'}
+[6.226244] (open3d_conversions) StdoutLine: {'line': b'-- Installing: /home/sultan/ros2_ws/install/open3d_conversions/share/open3d_conversions/cmake/export_open3d_conversionsExport.cmake\n'}
+[6.226310] (open3d_conversions) StdoutLine: {'line': b'-- Installing: /home/sultan/ros2_ws/install/open3d_conversions/share/open3d_conversions/cmake/export_open3d_conversionsExport-noconfig.cmake\n'}
+[6.226361] (open3d_conversions) StdoutLine: {'line': b'-- Installing: /home/sultan/ros2_ws/install/open3d_conversions/share/open3d_conversions/cmake/ament_cmake_export_include_directories-extras.cmake\n'}
+[6.226411] (open3d_conversions) StdoutLine: {'line': b'-- Installing: /home/sultan/ros2_ws/install/open3d_conversions/share/open3d_conversions/cmake/ament_cmake_export_libraries-extras.cmake\n'}
+[6.226461] (open3d_conversions) StdoutLine: {'line': b'-- Installing: /home/sultan/ros2_ws/install/open3d_conversions/share/open3d_conversions/cmake/ament_cmake_export_targets-extras.cmake\n'}
+[6.226510] (open3d_conversions) StdoutLine: {'line': b'-- Installing: /home/sultan/ros2_ws/install/open3d_conversions/share/open3d_conversions/cmake/ament_cmake_export_dependencies-extras.cmake\n'}
+[6.226562] (open3d_conversions) StdoutLine: {'line': b'-- Installing: /home/sultan/ros2_ws/install/open3d_conversions/share/open3d_conversions/cmake/open3d_conversionsConfig.cmake\n'}
+[6.226609] (open3d_conversions) StdoutLine: {'line': b'-- Installing: /home/sultan/ros2_ws/install/open3d_conversions/share/open3d_conversions/cmake/open3d_conversionsConfig-version.cmake\n'}
+[6.226655] (open3d_conversions) StdoutLine: {'line': b'-- Installing: /home/sultan/ros2_ws/install/open3d_conversions/share/open3d_conversions/package.xml\n'}
+[6.227451] (open3d_conversions) CommandEnded: {'returncode': 0}
+[6.267503] (open3d_conversions) JobEnded: {'identifier': 'open3d_conversions', 'rc': 0}
+[6.268255] (-) EventReactorShutdown: {}
