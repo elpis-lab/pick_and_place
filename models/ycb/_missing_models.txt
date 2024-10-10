@@ -1,0 +1,31 @@
+notes:
+1, All the texture images are compressed to 80% JPG with image size unchanged. Since the vision pipeline is not we care the most, as long as the detection works, we would like to compress textures for better performance.
+
+2, This folder only includes models that are Google 16K. Shown as below, the other models are not included.
+
+rgbd models (not google_16k):
+001
+041
+049
+072-f
+072-h
+072-i
+072-j
+072-k
+073-h
+073-i
+073-j
+073-k
+073-l
+073-m
+
+not included models (due to low-quality model):
+023
+039
+046
+047
+063-c
+063-d
+063-e
+063-f
+072-g

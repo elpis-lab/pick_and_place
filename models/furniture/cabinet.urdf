@@ -1,0 +1,58 @@
+<robot name="cabinet">
+    <link name="world"/>
+
+    <joint name="fixed" type="fixed">
+        <parent link="world"/>
+        <child link="base_link"/>
+        <origin xyz="0 0 0"/>
+    </joint>
+
+    <link name="base_link">
+        <inertial>
+            <origin rpy="0 0 0" xyz="0 0 0"/>
+            <mass value="1.0"/>
+            <inertia ixx="1.0" ixy="0" ixz="0" iyy="1.0" iyz="0" izz="1.0"/>
+        </inertial>
+        <visual>
+            <origin rpy="0 0 0" xyz="0 0 0"/>
+            <geometry>
+                <mesh filename="cabinet/base_link.obj" scale="1 1 1" />
+            </geometry>
+        </visual>
+        <collision>
+            <origin rpy="0 0 0" xyz="0 0 0"/>
+            <geometry>
+                <mesh filename="cabinet/base_link_vhacd.obj" scale="1 1 1" />
+            </geometry>
+        </collision>
+    </link>
+
+    <link name="door">
+        <inertial>
+            <origin rpy="0 0 0" xyz="-0.2 -0.01 0"/>
+            <mass value="1.0"/>
+            <inertia ixx="0.02667" ixy="0" ixz="0" iyy="0.01337" iyz="0" izz="0.01337"/>
+        </inertial>
+        <visual>
+            <origin rpy="0 0 0" xyz="-0.2 -0.01 0"/>
+            <geometry>
+                <mesh filename="cabinet/door.obj" scale="1 1 1" />
+            </geometry>
+        </visual>
+        <collision>
+            <origin rpy="0 0 0" xyz="-0.2 -0.01 0"/>
+            <geometry>
+                <mesh filename="cabinet/door_vhacd.obj" scale="1 1 1" />
+            </geometry>
+        </collision>
+    </link>
+
+    <joint name="joint_base_link_door" type="revolute">
+        <parent link="base_link"/>
+        <child link="door"/>
+        <dynamics damping="1.0" friction="0.0001"/>
+        <limit lower="0.0" upper="3.14159"/>
+        <origin xyz="0.2 -0.205 0.2"/>
+        <axis xyz="0 0 1"/>
+    </joint>
+</robot>
