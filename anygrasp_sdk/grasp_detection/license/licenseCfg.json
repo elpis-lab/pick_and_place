@@ -1,0 +1,14 @@
+{
+    "version": "3.1.0",
+    "feature_id": "4391472969214506336",
+    "public_key": "UdayGirishMaradana.public_key",
+    "signature": "UdayGirishMaradana.signature",
+    "license": "UdayGirishMaradana.lic",
+    "toolbox": [
+        {
+            "name": "Basic",
+            "type": "PERMANENT",
+            "data": ""
+        }
+    ]
+}
