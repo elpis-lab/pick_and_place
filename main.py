@@ -62,11 +62,11 @@ class UR10Controller(Node):
     def get_current_pose(self):
         try:
             # Get the transform from base_link to tool0
-            transform = self.tf_buffer.lookup_transform('base', 'tool0', rclpy.time.Time())
+            transform = self.tf_buffer.lookup_transform('base_link', 'tool0', rclpy.time.Time())
             
             # Create a PoseStamped message
             pose_stamped = PoseStamped()
-            pose_stamped.header.frame_id = 'base'
+            pose_stamped.header.frame_id = 'base_link'
             pose_stamped.header.stamp = self.get_clock().now().to_msg()
             pose_stamped.pose.position.x = transform.transform.translation.x
             pose_stamped.pose.position.y = transform.transform.translation.y
@@ -207,7 +207,7 @@ def main(args=None):
         target_pose.orientation = current_pose.orientation
 
         # Plan movement
-        planned_trajectory = controller.plan_movement(target_pose)
+        #planned_trajectory = controller.plan_movement(target_pose)
         planned_trajectory = False
 
         if planned_trajectory:

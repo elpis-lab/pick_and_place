@@ -1,0 +1,169 @@
+# Use an NVIDIA CUDA 11.8 base image with Ubuntu 22.04
+FROM nvidia/cuda:11.8.0-cudnn8-devel-ubuntu22.04
+
+
+# Install NVIDIA SMI to check for GPU access
+#RUN --mount=type=cache,target=/var/cache/apt --gpus=all nvidia-smi
+
+# Print NVIDIA SMI
+# RUN nvidia-smi
+
+
+# Avoid prompts from apt
+ENV DEBIAN_FRONTEND=noninteractive
+
+RUN apt-get update && apt-get install -y \
+    software-properties-common \
+    && rm -rf /var/lib/apt/lists/*
+
+RUN apt-get install build-essential -y
+
+# RUN apt-get install gcc-7 g++-7 -y
+
+# Install system dependencies
+RUN apt-get update && apt-get install -y \
+    wget \
+    bzip2 \
+    ca-certificates \
+    libglib2.0-0 \
+    libxext6 \
+    libsm6 \
+    libxrender1 \
+    git \
+    python3 \
+    python3-pip \
+    && rm -rf /var/lib/apt/lists/*
+
+# Set working directory
+WORKDIR /app
+
+# Copy the entire project directory
+COPY . /app
+
+RUN echo "Hello from the Docker build process!"
+
+# Install Miniconda
+ENV CONDA_DIR=/opt/conda
+RUN wget --quiet https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh -O ~/miniconda.sh && \
+    /bin/bash ~/miniconda.sh -b -p $CONDA_DIR
+
+# Put conda in path so we can use conda activate
+ENV PATH=$CONDA_DIR/bin:$PATH
+
+# Create the Conda environment from angrasp_env.yml
+RUN conda env create -f angrasp_env.yml
+
+# Check for GPU presence
+RUN nvidia-smi || echo "WARNING: No GPU detected. Some installations might fail."
+
+# Print Python version and print to the console
+RUN conda run -n anygrasp_sdk python --version
+
+
+# Activate the Conda environment
+SHELL ["conda", "run", "-n", "anygrasp_sdk", "/bin/bash", "-c"]
+
+# Set CUDA_HOME and add CUDA to PATH
+ENV CUDA_HOME=/usr/local/cuda-11.1
+ENV PATH=${CUDA_HOME}/bin:${PATH}
+ENV LD_LIBRARY_PATH=${CUDA_HOME}/lib64:${LD_LIBRARY_PATH}
+
+# Install CUDA toolkit in the Conda environment
+# RUN conda install -c nvidia cuda-toolkit=11.1 -y
+RUN conda install openblas-devel -c anaconda -y
+
+# Install PyTorch with CUDA 11.8 support
+RUN conda install pytorch==1.9.0 torchvision==0.10.0 torchaudio==0.9.0 cudatoolkit=11.1 -c pytorch -c conda-forge
+
+# Install g++-7
+#RUN apt-get update && apt-get install -y g++-7
+
+# Install MinkowskiEngine
+RUN cd MinkowskiEngine && \
+    python setup.py install --blas_include_dirs=${CONDA_PREFIX}/include --blas=openblas
+
+# Install additional build tools
+RUN apt-get update && apt-get install -y \
+    ninja-build \
+    && rm -rf /var/lib/apt/lists/*
+
+# Activate the Conda environment
+SHELL ["conda", "run", "-n", "anygrasp_sdk", "/bin/bash", "-c"]
+
+# Set CUDA_HOME and add CUDA to PATH
+ENV CUDA_HOME=/usr/local/cuda-11.1
+ENV PATH=${CUDA_HOME}/bin:${PATH}
+ENV LD_LIBRARY_PATH=${CUDA_HOME}/lib64:${LD_LIBRARY_PATH}
+
+# Debug: Print environment information
+RUN echo "Python version:" && python --version && \
+    echo "CUDA version:" && nvcc --version && \
+    echo "PyTorch version:" && python -c "import torch; print(torch.__version__)" && \
+    echo "CUDA available:" && python -c "import torch; print(torch.cuda.is_available())" && \
+    echo "GPU devices:" && python -c "import torch; print(torch.cuda.device_count())"
+
+# Set TORCH_CUDA_ARCH_LIST
+ENV TORCH_CUDA_ARCH_LIST="3.5;5.0;6.0;6.1;7.0;7.5;8.0;8.6+PTX"
+
+RUN pip install -r requirements.txt
+
+# Activate the Conda environment by default
+RUN echo "source activate anygrasp_sdk" >> ~/.bashrc
+
+# Optional: Set the default shell to bash
+# Initialize Conda for bash shell
+RUN /opt/conda/bin/conda init bash
+
+# Activate the Conda environment by default
+RUN echo "source /opt/conda/bin/activate anygrasp_sdk" >> ~/.bashrc
+
+# Optional: Set the default shell to bash
+SHELL ["/bin/bash", "-c"]
+
+
+
+# Copy pointnet2 directory
+# COPY pointnet2 /app/pointnet2
+
+# # Change to pointnet2 directory
+# WORKDIR /app/pointnet2
+
+# # Debug: List contents of pointnet2 directory
+# RUN ls -la
+
+# # Install pointnet2 dependencies
+# # RUN pip install -r requirements.txt 
+# #|| echo "No requirements.txt found"
+
+# # Set compilation flags
+# # ENV CFLAGS="-I${CUDA_HOME}/include ${CFLAGS}"
+# # ENV LDFLAGS="-L${CUDA_HOME}/lib64 ${LDFLAGS}"
+
+# # Attempt to install pointnet2 with verbose output
+# # RUN VERBOSE=1 pip install -v -e .
+
+# # # If the above fails, try to run setup.py directly with more debug info
+# # RUN if [ $? -ne 0 ]; then \
+# #         python setup.py build_ext --inplace -v; \
+# #         python setup.py install -v; \
+# #     fi
+
+# # Echo which Python environment is being used
+# RUN echo "Using Python environment: "$(which python3)
+
+# # Echo Which conda environment is being used
+# # RUN echo "Using Conda environment: $(which conda)"
+
+# RUN python3 setup.py install
+
+# # Return to app directory
+# WORKDIR /app
+
+# # Set the PYTHONPATH to include the current directory
+# ENV PYTHONPATH=/app
+
+# # Set the working directory to the grasp_detection folder
+# WORKDIR /app/grasp_detection
+
+# # The command to run when the container starts
+# CMD ["python3", "demo_robot.py", "--checkpoint_path", "log/checkpoint_detection.tar", "--realsense_json", "../realsense_config.json", "--top_down_grasp"]

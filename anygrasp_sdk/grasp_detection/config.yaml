@@ -1,0 +1,31 @@
+# AnyGrasp Model Configuration
+model:
+  checkpoint_path: "log/checkpoint_detection.tar"
+  max_gripper_width: 0.1
+  gripper_height: 0.03
+  top_down_grasp: true # Set to false for side grasp
+  debug: false
+
+# Camera Intrinsics
+camera:
+  fx: 927.17
+  fy: 927.37
+  cx: 651.32
+  cy: 349.62
+  scale: 1000.0
+
+# Workspace Limits
+workspace:
+  xmin: -0.19
+  xmax: 0.12
+  ymin: 0.02
+  ymax: 0.15
+  zmin: 0.0
+  zmax: 1.0
+
+# Grasp Detection Settings
+grasp:
+  apply_object_mask: true
+  dense_grasp: false
+  collision_detection: true
+  num_grasps: 20
