@@ -1,0 +1,23 @@
+# ninja log v5
+1	5296	1726699964469616010	/home/athena/Projects/Pick_Place/anygrasp_sdk/pointnet2/build/temp.linux-x86_64-cpython-38/pointnet2/_ext_src/src/cylinder_query_gpu.o	6d345d4a89ba2e66
+2	5500	1726699964674616099	/home/athena/Projects/Pick_Place/anygrasp_sdk/pointnet2/build/temp.linux-x86_64-cpython-38/pointnet2/_ext_src/src/interpolate_gpu.o	f44b706fec3266df
+2	5781	1726699964954616221	/home/athena/Projects/Pick_Place/anygrasp_sdk/pointnet2/build/temp.linux-x86_64-cpython-38/pointnet2/_ext_src/src/sampling_gpu.o	3987311b6378f36c
+0	6058	1726699965232616343	/home/athena/Projects/Pick_Place/anygrasp_sdk/pointnet2/build/temp.linux-x86_64-cpython-38/pointnet2/_ext_src/src/ball_query_gpu.o	32d9294383e1f46c
+0	7021	1726699966194616764	/home/athena/Projects/Pick_Place/anygrasp_sdk/pointnet2/build/temp.linux-x86_64-cpython-38/pointnet2/_ext_src/src/ball_query.o	5126042cfc216df4
+1	7080	1726699966254616791	/home/athena/Projects/Pick_Place/anygrasp_sdk/pointnet2/build/temp.linux-x86_64-cpython-38/pointnet2/_ext_src/src/group_points.o	8a44daf2436e7407
+1	7157	1726699966331616825	/home/athena/Projects/Pick_Place/anygrasp_sdk/pointnet2/build/temp.linux-x86_64-cpython-38/pointnet2/_ext_src/src/cylinder_query.o	967cc64256caeff2
+1	7185	1726699966360616837	/home/athena/Projects/Pick_Place/anygrasp_sdk/pointnet2/build/temp.linux-x86_64-cpython-38/pointnet2/_ext_src/src/group_points_gpu.o	ff28630d0e8e3868
+1	7675	1726699966849617052	/home/athena/Projects/Pick_Place/anygrasp_sdk/pointnet2/build/temp.linux-x86_64-cpython-38/pointnet2/_ext_src/src/interpolate.o	d002b0a87035a423
+1	9397	1726699968569617812	/home/athena/Projects/Pick_Place/anygrasp_sdk/pointnet2/build/temp.linux-x86_64-cpython-38/pointnet2/_ext_src/src/bindings.o	6cd7ac16a1473290
+2	9593	1726699968767617899	/home/athena/Projects/Pick_Place/anygrasp_sdk/pointnet2/build/temp.linux-x86_64-cpython-38/pointnet2/_ext_src/src/sampling.o	c8dcf1b0dc6b651c
+0	5383	1728984142116932431	/home/athena/Projects/Pick_Place/Pick_Place_UR/anygrasp_sdk/pointnet2/build/temp.linux-x86_64-cpython-38/pointnet2/_ext_src/src/cylinder_query_gpu.o	2894cfb092ea66ee
+0	5467	1728984142199932676	/home/athena/Projects/Pick_Place/Pick_Place_UR/anygrasp_sdk/pointnet2/build/temp.linux-x86_64-cpython-38/pointnet2/_ext_src/src/ball_query_gpu.o	f0e81566f9790da
+1	6118	1728984142851934598	/home/athena/Projects/Pick_Place/Pick_Place_UR/anygrasp_sdk/pointnet2/build/temp.linux-x86_64-cpython-38/pointnet2/_ext_src/src/group_points_gpu.o	ec745a4d64d4d7cb
+1	6506	1728984143239935742	/home/athena/Projects/Pick_Place/Pick_Place_UR/anygrasp_sdk/pointnet2/build/temp.linux-x86_64-cpython-38/pointnet2/_ext_src/src/interpolate_gpu.o	d23d3c79e0b41cca
+1	6575	1728984143308935945	/home/athena/Projects/Pick_Place/Pick_Place_UR/anygrasp_sdk/pointnet2/build/temp.linux-x86_64-cpython-38/pointnet2/_ext_src/src/sampling_gpu.o	856b6fffb9cc02
+0	7308	1728984144041938106	/home/athena/Projects/Pick_Place/Pick_Place_UR/anygrasp_sdk/pointnet2/build/temp.linux-x86_64-cpython-38/pointnet2/_ext_src/src/cylinder_query.o	1121109bdbf023b2
+1	7429	1728984144163938466	/home/athena/Projects/Pick_Place/Pick_Place_UR/anygrasp_sdk/pointnet2/build/temp.linux-x86_64-cpython-38/pointnet2/_ext_src/src/sampling.o	ee3b8afb0e8895fa
+0	7469	1728984144201938578	/home/athena/Projects/Pick_Place/Pick_Place_UR/anygrasp_sdk/pointnet2/build/temp.linux-x86_64-cpython-38/pointnet2/_ext_src/src/interpolate.o	fc87a8e124187efc
+0	7546	1728984144279938808	/home/athena/Projects/Pick_Place/Pick_Place_UR/anygrasp_sdk/pointnet2/build/temp.linux-x86_64-cpython-38/pointnet2/_ext_src/src/ball_query.o	58232f6ae49fca92
+1	7954	1728984144687940010	/home/athena/Projects/Pick_Place/Pick_Place_UR/anygrasp_sdk/pointnet2/build/temp.linux-x86_64-cpython-38/pointnet2/_ext_src/src/group_points.o	34b226ae4d86b29
+0	9633	1728984146364944953	/home/athena/Projects/Pick_Place/Pick_Place_UR/anygrasp_sdk/pointnet2/build/temp.linux-x86_64-cpython-38/pointnet2/_ext_src/src/bindings.o	638b65c7ccaf4f60
