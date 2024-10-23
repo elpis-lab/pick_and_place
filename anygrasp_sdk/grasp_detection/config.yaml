@@ -26,6 +26,6 @@ workspace:
 # Grasp Detection Settings
 grasp:
   apply_object_mask: true
-  dense_grasp: false
+  dense_grasp: true
   collision_detection: true
-  num_grasps: 20
+  num_grasps: 50

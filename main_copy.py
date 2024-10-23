@@ -290,8 +290,8 @@ class IntegratedPickPlace(Node):
             
             # Show camera frames
             cv2.imshow("RealSense Color Image", color_image)
-            #cv2.imshow("RealSense Depth Image", cv2.applyColorMap(
-            #    cv2.convertScaleAbs(depth_image, alpha=0.03), cv2.COLORMAP_JET))
+            cv2.imshow("RealSense Depth Image", cv2.applyColorMap(
+                cv2.convertScaleAbs(depth_image, alpha=0.03), cv2.COLORMAP_JET))
             cv2.waitKey(30)
             
             # Process with vision APIs
