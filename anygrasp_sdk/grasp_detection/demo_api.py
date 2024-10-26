@@ -51,6 +51,7 @@ async def get_grasp(
     color_image: UploadFile = File(...),
     depth_image: UploadFile = File(...)
 ):
+    retry_count = 0
     # Read and process the uploaded images
     color_data = await color_image.read()
     depth_data = await depth_image.read()
@@ -73,7 +74,7 @@ async def get_grasp(
     # Get point cloud
     xmap, ymap = np.arange(depths.shape[1]), np.arange(depths.shape[0])
     xmap, ymap = np.meshgrid(xmap, ymap)
-    points_z = depths / scale
+    points_z = depths * scale
     points_x = (xmap - cx) / fx * points_z
     points_y = (ymap - cy) / fy * points_z
 
@@ -92,8 +93,28 @@ async def get_grasp(
 
     if gg is None:
         gg = []
+
     if len(gg) == 0 or gg is None:
         return JSONResponse(content={"message": "No Grasp detected after collision detection!"}, status_code=404)
+    
+    # for i in range(3):
+    #     if len(gg) == 0 or gg is None:
+    #         #return JSONResponse(content={"message": "No Grasp detected after collision detection!"}, status_code=404)
+    #         retry_count += 1
+    #         print(f"Retry {retry_count}")
+    #         if retry_count > 3:
+    #             return JSONResponse(content={"message": "No Grasp detected after collision detection!"}, status_code=404)
+    #         else:
+    #             gg, cloud = anygrasp.get_grasp(
+    #                 points, colors, lims=lims, 
+    #                 apply_object_mask=config.grasp['apply_object_mask'],
+    #                 dense_grasp=config.grasp['dense_grasp'],
+    #                 collision_detection=config.grasp['collision_detection']
+    #             )
+    #             if gg is None:
+    #                 gg = []
+    #     else:
+    #         break
 
     gg = gg.nms().sort_by_score()
     gg_pick = gg[0:config.grasp['num_grasps']]

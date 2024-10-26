@@ -12,6 +12,12 @@ from rclpy.executors import MultiThreadedExecutor
 from moveit_msgs.msg import PositionConstraint, BoundingVolume
 from shape_msgs.msg import SolidPrimitive
 import threading
+from trajectory_msgs.msg import JointTrajectory, JointTrajectoryPoint
+import numpy as np
+import requests 
+from concurrent.futures import ThreadPoolExecutor
+import asyncio
+
 #from moveit2.move_group_interface import MoveGroupInterface
 
 class RobotControl(Node):
@@ -44,6 +50,27 @@ class RobotControl(Node):
         self.check_action_client_availability() 
 
         #self.move_group_interface = MoveGroupInterface("ur_manipulator", "base_link", self)
+
+        self.gripper_api_url = "http://localhost:8005" 
+    
+    def control_gripper(self, action):
+        """Control the gripper through its API"""
+        try:
+            response = requests.post(f"{self.gripper_api_url}/{action}")
+            return response.json()
+        except Exception as e:
+            self.get_logger().error(f'Error controlling gripper: {e}')
+            return None
+        #try:
+        #    with ThreadPoolExecutor() as executor:
+        #        response = await asyncio.get_event_loop().run_in_executor(
+        #            executor,
+        #            lambda: requests.post(f"{self.gripper_api_url}/{action}")
+        #        )
+        #    return response.json()
+        #except Exception as e:
+        #    self.get_logger().error(f'Error controlling gripper: {e}')
+        #    return None
 
     def check_action_client_availability(self):
         self.get_logger().info('Checking scaled joint trajectory controller availability...')
@@ -88,7 +115,7 @@ class RobotControl(Node):
         request.header = Header()
         request.header.stamp = self.get_clock().now().to_msg()
         request.header.frame_id = 'base_link'  # Adjust as needed
-        request.fk_link_names = ['tool0'] #['tool0']  # Adjust to your robot's end-effector link name
+        request.fk_link_names = ['wrist_3_link'] #['tool0']  # Adjust to your robot's end-effector link name
         request.robot_state.joint_state = self.current_joint_state
 
         self.get_logger().info(f"Requesting FK for joints: {request.robot_state.joint_state.name}")
@@ -210,6 +237,28 @@ class RobotControl(Node):
         else:
             self.get_logger().error('Failed to call motion planning service')
             return None
+        
+
+    def throw_trajectory(self,joint_angles):
+        goal_msg = FollowJointTrajectory.Goal()
+        
+        # Create the JointTrajectory
+        msg = JointTrajectory()
+        msg.joint_names = ['shoulder_pan_joint', 'shoulder_lift_joint', 'elbow_joint', 
+                            'wrist_1_joint', 'wrist_2_joint', 'wrist_3_joint']
+
+        point = JointTrajectoryPoint()
+        point.positions = joint_angles  # Target positions in radians
+        # point.velocities = [0.05] * 6  # Target velocities
+        point.time_from_start.sec = 15  # Duration to reach the target
+        point.time_from_start.nanosec = 15000000000
+        msg.points.append(point)
+        
+        # Assign the trajectory to the goal message
+        goal_msg.trajectory = msg
+
+        return goal_msg.trajectory
+
 
     def diagnose_planning_failure(self, error_code):
         if error_code == -1:
@@ -282,7 +331,6 @@ class RobotControl(Node):
 
     def display_trajectory(self, trajectory):
         display_trajectory = DisplayTrajectory()
-        display_trajectory.trajectory.append(trajectory)
         
         # Set the start state
         start_state = RobotState()
@@ -292,7 +340,21 @@ class RobotControl(Node):
         # Set the correct model ID (robot name)
         display_trajectory.model_id = "ur"  # Change this to your robot's name as defined in the URDF
 
-        self.get_logger().info(f"Publishing trajectory with {len(trajectory.joint_trajectory.points)} points")
+        
+        # Handle both direct JointTrajectory and planned trajectory cases
+        if hasattr(trajectory, 'joint_trajectory'):
+            # Case 1: Trajectory from motion planning
+            display_trajectory.trajectory.append(trajectory)
+            num_points = len(trajectory.joint_trajectory.points)
+        else:
+            # Case 2: Direct JointTrajectory
+            from moveit_msgs.msg import RobotTrajectory
+            robot_trajectory = RobotTrajectory()
+            robot_trajectory.joint_trajectory = trajectory
+            display_trajectory.trajectory.append(robot_trajectory)
+            num_points = len(trajectory.points)
+
+        self.get_logger().info(f"Publishing trajectory with {num_points} points")
         
         # Publish the trajectory multiple times to ensure it's received and displayed
         for _ in range(5):
@@ -301,15 +363,25 @@ class RobotControl(Node):
 
         self.get_logger().info("Trajectory published for display in RViz")
 
+
+
     def execute_trajectory(self, trajectory):
         # Wait for the action server to be available
         if not self.trajectory_client.wait_for_server(timeout_sec=5.0):
             self.get_logger().error('Action server not available')
             return False
+        
+        # Open the gripper at the middle of the trajectory
+        # gripper_opened = self.control_gripper("open") # optional
 
         # Create a FollowJointTrajectory action goal
         goal_msg = FollowJointTrajectory.Goal()
-        goal_msg.trajectory = trajectory.joint_trajectory
+        
+        # Handle both direct JointTrajectory and planned trajectory cases
+        if hasattr(trajectory, 'joint_trajectory'):
+            goal_msg.trajectory = trajectory.joint_trajectory
+        else:
+            goal_msg.trajectory = trajectory
 
         # Send the goal
         self.get_logger().info('Sending trajectory execution goal')
@@ -342,6 +414,11 @@ def main(args=None):
     robot_control = RobotControl()
     executor = MultiThreadedExecutor()
     executor.add_node(robot_control)
+    joint_angles=[-1.17,-93.15,101.19,-131.58,-92.46,-183.90]
+    # joint_angles=[0.14,-93.30,111.13,200.65,-89.04,-0.03]
+    joint_angles=np.deg2rad(joint_angles)
+    joint_angles=list(joint_angles)
+    print(joint_angles)
 
     # Give more time for the node to initialize and receive joint states
     for _ in range(10):  # Try up to 10 times
@@ -370,23 +447,28 @@ def main(args=None):
         else:
             robot_control.get_logger().warn("Failed to get current joint angles")
 
-        # 3. Plan to a new end effector position using MoveIt planner
-        target_pose = Pose()
-        # Increase height by 0.2 with respect to the current position
-        target_pose.position.z = current_ee_pose.position.z + 0.4        # Reamining all the same
-        target_pose.position.x = current_ee_pose.position.x
-        target_pose.position.y = current_ee_pose.position.y
-        target_pose.orientation = current_ee_pose.orientation
+        # # 3. Plan to a new end effector position using MoveIt planner
+        # target_pose = Pose()
+        # # Increase height by 0.2 with respect to the current position
+        # target_pose.position.z = current_ee_pose.position.z + 0.4        # Reamining all the same
+        # target_pose.position.x = current_ee_pose.position.x
+        # target_pose.position.y = current_ee_pose.position.y
+        # target_pose.orientation = current_ee_pose.orientation
 
-        robot_control.get_logger().info(f"Planning to target pose: {target_pose}")
+        # robot_control.get_logger().info(f"Planning to target pose: {target_pose}")
 
         # 4. Plan and plot the trajectory in RViz
-        trajectory = robot_control.plan_to_pose(target_pose)
+        # trajectory = robot_control.plan_to_pose(target_pose)
+        trajectory=robot_control.throw_trajectory(joint_angles)
+
         if trajectory:
             robot_control.get_logger().info("Trajectory planned successfully")
+            # Close the gripper at the start of the trajectory
+            # gripper_closed = self.control_gripper("close") # optional
             robot_control.display_trajectory(trajectory)
             robot_control.get_logger().info("Trajectory should now be visible in RViz")
             
+
             # 5. Execute the trajectory
 
             execute_input = input("Do you want to execute the trajectory? (y/n): ")

@@ -2,7 +2,7 @@ import rclpy
 from rclpy.node import Node
 from rclpy.action import ActionClient
 from moveit_msgs.msg import DisplayTrajectory, MotionPlanRequest, WorkspaceParameters, Constraints, RobotState, RobotState, PositionConstraint, OrientationConstraint, JointConstraint
-from moveit_msgs.srv import GetPositionFK, GetPositionIK, GetMotionPlan
+from moveit_msgs.srv import GetPositionFK, GetPositionIK, GetMotionPlan, GetCartesianPath
 from control_msgs.action import FollowJointTrajectory
 from sensor_msgs.msg import JointState
 from geometry_msgs.msg import Pose, PoseStamped
@@ -12,7 +12,7 @@ from rclpy.executors import MultiThreadedExecutor
 from moveit_msgs.msg import PositionConstraint, BoundingVolume
 from shape_msgs.msg import SolidPrimitive
 import threading
-#from moveit2.move_group_interface import MoveGroupInterface
+from copy import deepcopy
 
 class RobotControl(Node):
     def __init__(self):
@@ -23,6 +23,7 @@ class RobotControl(Node):
         self.fk_client = self.create_client(GetPositionFK, '/compute_fk', callback_group=self.callback_group)
         self.ik_client = self.create_client(GetPositionIK, '/compute_ik', callback_group=self.callback_group)
         self.plan_client = self.create_client(GetMotionPlan, '/plan_kinematic_path', callback_group=self.callback_group)
+        self.cartesian_path_client = self.create_client(GetCartesianPath, '/compute_cartesian_path', callback_group=self.callback_group)
         
         # Publishers
         self.display_trajectory_pub = self.create_publisher(DisplayTrajectory, '/display_planned_path', 10)
@@ -32,7 +33,6 @@ class RobotControl(Node):
         self.current_joint_state = None
 
         # Action client for trajectory execution
-        #self.trajectory_client = ActionClient(self, FollowJointTrajectory, '/follow_joint_trajectory')
         self.trajectory_client = ActionClient(
             self,
             FollowJointTrajectory,
@@ -41,10 +41,9 @@ class RobotControl(Node):
         )
         
         # Check if the action server is available
-        self.check_action_client_availability() 
+        self.check_action_client_availability()
 
-        #self.move_group_interface = MoveGroupInterface("ur_manipulator", "base_link", self)
-
+    # [Keep all existing methods unchanged up to plan_to_pose]
     def check_action_client_availability(self):
         self.get_logger().info('Checking scaled joint trajectory controller availability...')
         
@@ -67,7 +66,7 @@ class RobotControl(Node):
                 self.get_logger().warn('2. Verify that the scaled_joint_trajectory_controller is loaded and running')
                 self.get_logger().warn('3. Check if the action server name is correct')
                 self.get_logger().warn('4. Look for any error messages in the robot driver or controller logs')
-        else:
+        else: 
             self.get_logger().error('Failed to determine action client availability')
 
     def _check_availability(self):
@@ -337,6 +336,73 @@ class RobotControl(Node):
             self.get_logger().error(f'Trajectory execution failed with error code: {result.error_code}')
             return False
 
+
+    def plan_to_pose_cartesian(self, target_pose, step_size=0.01, jump_threshold=0.0):
+        """
+        Plan a cartesian path to a target pose.
+        
+        Args:
+            target_pose (Pose): Target pose for the end effector
+            step_size (float): Maximum distance between waypoints (meters)
+            jump_threshold (float): Maximum allowed joint value jump between consecutive points
+            
+        Returns:
+            RobotTrajectory or None: Planned trajectory if successful, None otherwise
+        """
+        while not self.cartesian_path_client.wait_for_service(timeout_sec=1.0):
+            self.get_logger().info('Cartesian path service not available, waiting...')
+        
+        if self.current_joint_state is None:
+            self.get_logger().error('No joint state received yet')
+            return None
+            
+        request = GetCartesianPath.Request()
+        request.header = Header()
+        request.header.frame_id = 'base_link'
+        request.header.stamp = self.get_clock().now().to_msg()
+        request.start_state.joint_state = self.current_joint_state
+        request.group_name = "ur_manipulator"
+        request.link_name = "tool0"  # or wrist_3_link depending on your setup
+        request.waypoints = [target_pose]
+        request.max_step = step_size
+        request.jump_threshold = jump_threshold
+        request.avoid_collisions = True
+        request.path_constraints.name = "path_constraints"
+        
+        self.get_logger().info(f"Planning cartesian path to target pose: {target_pose}")
+        future = self.cartesian_path_client.call_async(request)
+        rclpy.spin_until_future_complete(self, future)
+        
+        if future.result() is not None:
+            response = future.result()
+            if response.fraction > 0.95:  # Path found for at least 95% of the distance
+                self.get_logger().info(f"Cartesian path planning succeeded, fraction: {response.fraction}")
+                self.display_trajectory(response.solution)
+                return response.solution
+            else:
+                self.get_logger().error(f'Could only compute {response.fraction * 100}% of the path')
+                self.diagnose_cartesian_planning_failure(response.fraction)
+                return None
+        else:
+            self.get_logger().error('Failed to call cartesian path planning service')
+            return None
+
+    def diagnose_cartesian_planning_failure(self, fraction):
+        """Provide diagnostic information for cartesian planning failures"""
+        self.get_logger().error(f"Cartesian planning failed, only achieved {fraction * 100}% of the path")
+        self.get_logger().info("Common causes of cartesian planning failures:")
+        self.get_logger().info("1. Target pose is outside the robot's reachable workspace")
+        self.get_logger().info("2. Straight-line path would exceed joint limits")
+        self.get_logger().info("3. Collision detected along the path")
+        self.get_logger().info("4. IK solutions not found for some waypoints")
+        self.get_logger().info("\nPossible solutions:")
+        self.get_logger().info("1. Try reducing step_size for finer motion planning")
+        self.get_logger().info("2. Adjust the jump_threshold if joint motions are too large")
+        self.get_logger().info("3. Consider using regular plan_to_pose() instead")
+        self.get_logger().info("4. Check if target pose is within workspace")
+
+    # [Keep all remaining existing methods unchanged]
+
 def main(args=None):
     rclpy.init(args=args)
     robot_control = RobotControl()
@@ -344,7 +410,7 @@ def main(args=None):
     executor.add_node(robot_control)
 
     # Give more time for the node to initialize and receive joint states
-    for _ in range(10):  # Try up to 10 times
+    for _ in range(10):
         rclpy.spin_once(robot_control, timeout_sec=1.0)
         if robot_control.current_joint_state is not None:
             break
@@ -356,55 +422,52 @@ def main(args=None):
         return
 
     try:
-        # 1. Get current robot position (Base to end effector)
+        # Get current robot position (End effector)
         current_ee_pose = robot_control.get_current_ee_pose()
         if current_ee_pose:
             robot_control.get_logger().info(f"Current end-effector pose: {current_ee_pose}")
         else:
             robot_control.get_logger().warn("Failed to get current end-effector pose")
+            return
 
-        # 2. Get current robot position (all joint angles)
+        # Get current joint angles
         current_joint_angles = robot_control.get_current_joint_angles()
         if current_joint_angles:
             robot_control.get_logger().info(f"Current joint angles: {current_joint_angles}")
         else:
             robot_control.get_logger().warn("Failed to get current joint angles")
 
-        # 3. Plan to a new end effector position using MoveIt planner
+        # Create target pose (example: move up 20cm)
         target_pose = Pose()
-        # Increase height by 0.2 with respect to the current position
-        target_pose.position.z = current_ee_pose.position.z + 0.4        # Reamining all the same
-        target_pose.position.x = current_ee_pose.position.x
-        target_pose.position.y = current_ee_pose.position.y
+        target_pose.position.z = current_ee_pose.position.z + 0.2
+        target_pose.position.x = current_ee_pose.position.x + 0.1
+        target_pose.position.y = current_ee_pose.position.y + 0.15
         target_pose.orientation = current_ee_pose.orientation
 
-        robot_control.get_logger().info(f"Planning to target pose: {target_pose}")
+        # Ask user which planning method to use
+        planning_method = input("Choose planning method (1 for RRT, 2 for Cartesian): ")
 
-        # 4. Plan and plot the trajectory in RViz
-        trajectory = robot_control.plan_to_pose(target_pose)
+        trajectory = None
+        if planning_method == "1":
+            robot_control.get_logger().info("Using RRT planning")
+            trajectory = robot_control.plan_to_pose(target_pose)
+        else:
+            robot_control.get_logger().info("Using Cartesian planning")
+            trajectory = robot_control.plan_to_pose_cartesian(target_pose)
+
         if trajectory:
             robot_control.get_logger().info("Trajectory planned successfully")
-            robot_control.display_trajectory(trajectory)
-            robot_control.get_logger().info("Trajectory should now be visible in RViz")
             
-            # 5. Execute the trajectory
-
             execute_input = input("Do you want to execute the trajectory? (y/n): ")
             if execute_input.lower() == 'y':
                 execute_success = robot_control.execute_trajectory(trajectory)
                 if execute_success:
                     robot_control.get_logger().info("Trajectory execution completed successfully")
                 else:
-                    robot_control.get_logger().warn("Trajectory execution   failed")
-            # execute_success = robot_control.execute_trajectory(trajectory)
-            # if execute_success:
-            #     robot_control.get_logger().info("Trajectory execution completed successfully")
-            # else:
-            #     robot_control.get_logger().warn("Trajectory execution failed")
+                    robot_control.get_logger().warn("Trajectory execution failed")
         else:
             robot_control.get_logger().warn("Failed to plan trajectory")
 
-        # Keep the node running to allow RViz to continue displaying the trajectory
         robot_control.get_logger().info("Keep this node running and check RViz for the displayed trajectory")
         rclpy.spin(robot_control)
 

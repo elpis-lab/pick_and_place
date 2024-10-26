@@ -22,6 +22,12 @@ def parse_args():
 def setup_realsense(json_file):
     pipeline = rs.pipeline()
     config = rs.config()
+
+    # Enable streams
+    config.enable_stream(rs.stream.depth, 640, 480, rs.format.z16, 30)
+    config.enable_stream(rs.stream.color, 640, 480, rs.format.bgr8, 30)
+    
+
     profile = pipeline.start(config)
     device = profile.get_device()
     adv_mode = rs.rs400_advanced_mode(device)
@@ -42,6 +48,8 @@ def setup_realsense(json_file):
     intrinsics_depth = depth_stream.as_video_stream_profile().get_intrinsics()
     fx, fy = intrinsics_depth.fx, intrinsics_depth.fy
     cx, cy = intrinsics_depth.ppx, intrinsics_depth.ppy
+    print("Depth Intrinsics: fx={}, fy={}, cx={}, cy={}".format(fx, fy, cx, cy))
+    print("Scale: ", depth_scale)
 
     return pipeline, fx, fy, cx, cy, depth_scale
 
