@@ -250,8 +250,8 @@ class RobotControl(Node):
         point = JointTrajectoryPoint()
         point.positions = joint_angles  # Target positions in radians
         # point.velocities = [0.05] * 6  # Target velocities
-        point.time_from_start.sec = 0  # Duration to reach the target
-        point.time_from_start.nanosec = 400000000
+        point.time_from_start.sec = 15  # Duration to reach the target
+        point.time_from_start.nanosec = 15000000000
         msg.points.append(point)
         
         # Assign the trajectory to the goal message
@@ -414,7 +414,7 @@ def main(args=None):
     robot_control = RobotControl()
     executor = MultiThreadedExecutor()
     executor.add_node(robot_control)
-    joint_angles=[-1.01,-94.35,139.36,312.38,-89.74,-1.30]
+    joint_angles=[-1.17,-93.15,101.19,-131.58,-92.46,-183.90]
     # joint_angles=[0.14,-93.30,111.13,200.65,-89.04,-0.03]
     joint_angles=np.deg2rad(joint_angles)
     joint_angles=list(joint_angles)

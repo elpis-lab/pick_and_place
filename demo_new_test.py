@@ -88,7 +88,7 @@ class RobotControl(Node):
         request.header = Header()
         request.header.stamp = self.get_clock().now().to_msg()
         request.header.frame_id = 'base_link'  # Adjust as needed
-        request.fk_link_names = ['wrist_3_link'] #['tool0']  # Adjust to your robot's end-effector link name
+        request.fk_link_names = ['tool0'] #['tool0']  # Adjust to your robot's end-effector link name
         request.robot_state.joint_state = self.current_joint_state
 
         self.get_logger().info(f"Requesting FK for joints: {request.robot_state.joint_state.name}")
