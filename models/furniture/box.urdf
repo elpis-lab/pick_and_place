@@ -1,0 +1,23 @@
+<?xml version="1.0" ?>
+<robot name="simple_box">
+  <link name="box_link">
+    <visual>
+      <geometry>
+        <box size="0.2 0.01 0.01"/> <!-- Size in meters: width, depth, height -->
+      </geometry>
+      <material name="blue">
+        <color rgba="0 0 1 1"/> <!-- Blue color with full opacity -->
+      </material>
+    </visual>
+    <collision>
+      <geometry>
+        <box size="0.2 0.01 0.01"/> <!-- Size for collision detection -->
+      </geometry>
+    </collision>
+    <inertial>
+      <mass value="1.0"/> <!-- Mass in kilograms -->
+      <origin xyz="0 0 0"/>
+      <inertia ixx="0.001" ixy="0.0" ixz="0.0" iyy="0.001" iyz="0.0" izz="0.001"/>
+    </inertial>
+  </link>
+</robot>
