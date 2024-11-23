@@ -110,7 +110,7 @@ class RobotControl(Node):
                 return None
 
     def get_current_ee_pose(self):
-        while not self.fk_client.wait_for_service(timeout_sec=1.0):
+        while not self.fk_client.wait_for_service(timeout_sec=2.0):
             self.get_logger().info('FK service not available, waiting...')
 
         if self.current_joint_state is None:
@@ -121,7 +121,7 @@ class RobotControl(Node):
         request.header = Header()
         request.header.stamp = self.get_clock().now().to_msg()
         request.header.frame_id = 'base_link'  # Adjust as needed #base_link
-        request.fk_link_names = ['tool0']  # Adjust to your robot's end-effector link name #['wrist_3_link'] 
+        request.fk_link_names =['wrist_3_link']  #['tool0']  # Adjust to your robot's end-effector link name #['wrist_3_link'] 
         request.robot_state.joint_state = self.current_joint_state
 
         #self.get_logger().info(f"Requesting FK for joints: {request.robot_state.joint_state.name}")
@@ -397,7 +397,7 @@ class RobotControl(Node):
 
         self.get_logger().info("Trajectory published for display in RViz")
 
-    def execute_trajectory_unscaled(self, trajectory):
+    def execute_trajectory(self, trajectory):
         # Wait for the action server to be available
         if not self.trajectory_client.wait_for_server(timeout_sec=5.0):
             self.get_logger().error('Action server not available')
@@ -409,78 +409,6 @@ class RobotControl(Node):
 
         # Send the goal
         self.get_logger().info('Sending trajectory execution goal')
-        send_goal_future = self.trajectory_client.send_goal_async(goal_msg)
-
-        # Wait for the server to accept the goal
-        rclpy.spin_until_future_complete(self, send_goal_future)
-        goal_handle = send_goal_future.result()
-
-        if not goal_handle.accepted:
-            self.get_logger().error('Goal rejected')
-            return False
-
-        self.get_logger().info('Goal accepted')
-
-        # Wait for the result
-        result_future = goal_handle.get_result_async()
-        rclpy.spin_until_future_complete(self, result_future)
-
-        result = result_future.result().result
-        if result.error_code == FollowJointTrajectory.Result.SUCCESSFUL:
-            self.get_logger().info('Trajectory execution succeeded')
-            return True
-        else:
-            self.get_logger().error(f'Trajectory execution failed with error code: {result.error_code}')
-            return False
-        
-    def execute_trajectory(self, trajectory, velocity_scaling=0.3, acceleration_scaling=0.3):
-        """
-        Execute a planned trajectory with reduced speed.
-        
-        Args:
-            trajectory: The planned trajectory to execute
-            velocity_scaling: Factor to scale the velocity (0.0 to 1.0)
-            acceleration_scaling: Factor to scale the acceleration (0.0 to 1.0)
-        
-        Returns:
-            bool: True if execution was successful, False otherwise
-        """
-        # Wait for the action server to be available
-        if not self.trajectory_client.wait_for_server(timeout_sec=5.0):
-            self.get_logger().error('Action server not available')
-            return False
-
-        # Create a FollowJointTrajectory action goal
-        goal_msg = FollowJointTrajectory.Goal()
-        
-        # Scale the velocity and acceleration in the trajectory
-        scaled_trajectory = trajectory.joint_trajectory
-        for point in scaled_trajectory.points:
-            # Scale velocities
-            if point.velocities:
-                point.velocities = [v * velocity_scaling for v in point.velocities]
-            
-            # Scale accelerations
-            if point.accelerations:
-                point.accelerations = [a * acceleration_scaling for a in point.accelerations]
-            
-            # Scale time_from_start
-            if velocity_scaling < 1.0:
-                # Convert the current duration to seconds
-                current_duration_seconds = point.time_from_start.sec + (point.time_from_start.nanosec / 1e9)
-                # Scale the duration
-                scaled_duration_seconds = current_duration_seconds / velocity_scaling
-                # Convert back to seconds and nanoseconds
-                scaled_seconds = int(scaled_duration_seconds)
-                scaled_nanoseconds = int((scaled_duration_seconds - scaled_seconds) * 1e9)
-                # Create new Duration
-                point.time_from_start.sec = scaled_seconds
-                point.time_from_start.nanosec = scaled_nanoseconds
-
-        goal_msg.trajectory = scaled_trajectory
-
-        # Send the goal
-        self.get_logger().info(f'Sending trajectory execution goal (velocity scaling: {velocity_scaling}, acceleration scaling: {acceleration_scaling})')
         send_goal_future = self.trajectory_client.send_goal_async(goal_msg)
 
         # Wait for the server to accept the goal

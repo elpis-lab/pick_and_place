@@ -1,3 +1,5 @@
+#!/usr/bin/env python3
+
 import rclpy
 from rclpy.node import Node
 from rclpy.executors import MultiThreadedExecutor
@@ -36,7 +38,7 @@ class IntegratedPickPlace(Node):
         self.cy = None
 
         # Add Gripper offset
-        self.gripper_offset = 0.080
+        self.gripper_offset = 0.08
 
         # Get id of the realsense D435 (check for string in the name)
         cameras = list_realsense_cameras()
@@ -64,6 +66,11 @@ class IntegratedPickPlace(Node):
         #self.temp_xyzw = [0.0134823, 0.0504259, 0.997471, 0.04823]
 
         self.temp_xyz = [0.0195301, 0.0514428, 0.0542184]
+        self.eye_in_hand_scale = (0.5, 0.667)
+
+        #self.temp_xyz[0] = self.temp_xyz[0] * self.eye_in_hand_scale[0]
+        #self.temp_xyz[1] = self.temp_xyz[1] * self.eye_in_hand_scale[1]
+        
         self.temp_xyzw = [0.000546104,0.0378262,0.999282, -0.00209989]
         if self.temp_xyz and self.temp_xyzw:
             self.T_end_effector_camera = np.eye(4)
@@ -83,7 +90,7 @@ class IntegratedPickPlace(Node):
     def setup_realsense(self, json_file):
         """Setup RealSense camera with advanced mode configuration"""
         try:
-            pipeline = rs.pipeline()
+            pipeline = rs.pipeline()        
             config = rs.config()
 
             # To select a specific camera, add this line before enabling streams:
@@ -128,6 +135,8 @@ class IntegratedPickPlace(Node):
             self.get_logger().info(f"fx: {self.fx}, fy: {self.fy}")
             self.get_logger().info(f"cx: {self.cx}, cy: {self.cy}")
             self.get_logger().info("============================================")
+
+            
             
             print("RealSense camera setup completed successfully")
             
@@ -330,15 +339,16 @@ class IntegratedPickPlace(Node):
         bottom_row = np.hstack((langsam_viz, grasp_viz))
         combined_image = np.vstack((top_row, bottom_row))
 
-        cv2.imshow('Processing Results', combined_image)
-        self.get_logger().info("Press 'ESC' to continue...")
+        #cv2.imshow('Processing Results', combined_image)
+        #self.get_logger().info("Press 'ESC' to continue...")
         
-        while True:
-            key = cv2.waitKey(1)
-            if key == 27:  # ESC key
-                break
+        #while True:
+        #    key = cv2.waitKey(1)
+        #    if key == 27:  # ESC key
+        #        break
         
-        cv2.destroyAllWindows()
+        #cv2.destroyAllWindows()
+        return combined_image
 
     def fuse_grasps(self, langsam_result, anygrasp_result):
         """Fuse segmentation and grasp results"""
@@ -370,6 +380,10 @@ class IntegratedPickPlace(Node):
 
         T_cameraToGrasp = np.eye(4)
         T_cameraToGrasp[:3, 3] = grasp['translation']
+        #Adding lines to scale the translation
+        T_cameraToGrasp[:3, 3] = [T_cameraToGrasp[:3, 3][0] * self.eye_in_hand_scale[0], T_cameraToGrasp[:3, 3][1] * self.eye_in_hand_scale[1], T_cameraToGrasp[:3, 3][2]]
+
+
         T_cameraToGrasp[:3, :3] = np.array(grasp['rotation_matrix'])
         self.get_logger().info(f"Grasp translation: {grasp['translation']}")
 
@@ -671,10 +685,32 @@ class IntegratedPickPlace(Node):
                     if self.robot_control.execute_trajectory(trajectory):
                         await self.control_gripper("open")
                         self.get_logger().info("Place operation completed")
+
+                        # Return to home position
+                        return_home_input = input("Do you want to return to home position? (y/n): ")
+
+                        if return_home_input.lower() == 'y':
+                            home_pose = buffer_pose
+                            if self.cartesian_path:
+                                trajectory = self.robot_control.plan_to_pose_cartesian(home_pose)
+                                # Additonal params for plan to pose cartesian step_size, jump_threshold
+                            else:
+                                trajectory = self.robot_control.plan_to_pose(home_pose)
+                            if trajectory:
+                                execute_input = input("Do you want to execute the Home trajectory? (y/n): ")
+                                if execute_input.lower() == 'y':
+                                    if self.robot_control.execute_trajectory(trajectory):
+                                        self.get_logger().info("Home operation completed")
+                                        return True
+                            else:
+                                self.get_logger().error("Failed to execute home operation")
+                                return False
                         # Open gripper
                         return True
             self.get_logger().error("Failed to execute place operation")
             return False
+        
+            
 
 
         except Exception as e:

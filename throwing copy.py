@@ -12,8 +12,12 @@ from rclpy.executors import MultiThreadedExecutor
 from moveit_msgs.msg import PositionConstraint, BoundingVolume
 from shape_msgs.msg import SolidPrimitive
 import threading
-# Cartesian Path imports 
-from moveit_msgs.srv import GetCartesianPath
+from trajectory_msgs.msg import JointTrajectory, JointTrajectoryPoint
+import numpy as np
+import requests 
+from concurrent.futures import ThreadPoolExecutor
+import asyncio
+
 #from moveit2.move_group_interface import MoveGroupInterface
 
 class RobotControl(Node):
@@ -25,7 +29,6 @@ class RobotControl(Node):
         self.fk_client = self.create_client(GetPositionFK, '/compute_fk', callback_group=self.callback_group)
         self.ik_client = self.create_client(GetPositionIK, '/compute_ik', callback_group=self.callback_group)
         self.plan_client = self.create_client(GetMotionPlan, '/plan_kinematic_path', callback_group=self.callback_group)
-        self.cartesian_path_client = self.create_client(GetCartesianPath, '/compute_cartesian_path', callback_group=self.callback_group)
         
         # Publishers
         self.display_trajectory_pub = self.create_publisher(DisplayTrajectory, '/display_planned_path', 10)
@@ -47,6 +50,27 @@ class RobotControl(Node):
         self.check_action_client_availability() 
 
         #self.move_group_interface = MoveGroupInterface("ur_manipulator", "base_link", self)
+
+        self.gripper_api_url = "http://localhost:8005" 
+    
+    def control_gripper(self, action):
+        """Control the gripper through its API"""
+        try:
+            response = requests.post(f"{self.gripper_api_url}/{action}")
+            return response.json()
+        except Exception as e:
+            self.get_logger().error(f'Error controlling gripper: {e}')
+            return None
+        #try:
+        #    with ThreadPoolExecutor() as executor:
+        #        response = await asyncio.get_event_loop().run_in_executor(
+        #            executor,
+        #            lambda: requests.post(f"{self.gripper_api_url}/{action}")
+        #        )
+        #    return response.json()
+        #except Exception as e:
+        #    self.get_logger().error(f'Error controlling gripper: {e}')
+        #    return None
 
     def check_action_client_availability(self):
         self.get_logger().info('Checking scaled joint trajectory controller availability...')
@@ -79,36 +103,6 @@ class RobotControl(Node):
     def joint_state_callback(self, msg):
         self.current_joint_state = msg
 
-    def get_current_base_pose(self):
-        while not self.fk_client.wait_for_service(timeout_sec=1.0):
-            self.get_logger().info('FK service not available, waiting...')
-
-        if self.current_joint_state is None:
-            self.get_logger().error('No joint state received yet. Make sure the robot is publishing joint states.')
-            return None
-
-        request = GetPositionFK.Request()
-        request.header = Header()
-        request.header.stamp = self.get_clock().now().to_msg()
-        request.header.frame_id = 'base' # base_link
-        request.fk_link_names = ['base_link']
-        request.robot_state.joint_state = self.current_joint_state
-
-        #self.get_logger().info(f"Requesting FK for joints: {request.robot_state.joint_state.name}")
-        #self.get_logger().info(f"Joint positions: {request.robot_state.joint_state.position}")
-
-        future = self.fk_client.call_async(request)
-        rclpy.spin_until_future_complete(self, future)
-
-        if future.result() is not None:
-            result = future.result()
-            self.get_logger().info(f"FK service response: {result}")
-            if result.pose_stamped:
-                return result.pose_stamped[0].pose
-            else:
-                self.get_logger().error('FK service returned an empty result')
-                return None
-
     def get_current_ee_pose(self):
         while not self.fk_client.wait_for_service(timeout_sec=1.0):
             self.get_logger().info('FK service not available, waiting...')
@@ -120,12 +114,12 @@ class RobotControl(Node):
         request = GetPositionFK.Request()
         request.header = Header()
         request.header.stamp = self.get_clock().now().to_msg()
-        request.header.frame_id = 'base_link'  # Adjust as needed #base_link
-        request.fk_link_names = ['tool0']  # Adjust to your robot's end-effector link name #['wrist_3_link'] 
+        request.header.frame_id = 'base_link'  # Adjust as needed
+        request.fk_link_names = ['wrist_3_link'] #['tool0']  # Adjust to your robot's end-effector link name
         request.robot_state.joint_state = self.current_joint_state
 
-        #self.get_logger().info(f"Requesting FK for joints: {request.robot_state.joint_state.name}")
-        #self.get_logger().info(f"Joint positions: {request.robot_state.joint_state.position}")
+        self.get_logger().info(f"Requesting FK for joints: {request.robot_state.joint_state.name}")
+        self.get_logger().info(f"Joint positions: {request.robot_state.joint_state.position}")
  
         future = self.fk_client.call_async(request)
         rclpy.spin_until_future_complete(self, future)
@@ -149,8 +143,8 @@ class RobotControl(Node):
             self.get_logger().warn('No joint state received yet')
             return None
 
-    def plan_to_pose(self, target_pose, planner_id="RRTConnectkConfigDefault", num_planning_attempts=5000, planning_time=30.0):
-        while not self.plan_client.wait_for_service(timeout_sec=10.0):
+    def plan_to_pose(self, target_pose, planner_id="RRTConnectkConfigDefault", num_planning_attempts=2000, planning_time=2.0):
+        while not self.plan_client.wait_for_service(timeout_sec=1.0):
             self.get_logger().info('Motion planning service not available, waiting...')
 
         request = GetMotionPlan.Request()
@@ -187,18 +181,18 @@ class RobotControl(Node):
         #     ("wrist_2_joint", -1.57, 1.57),       # -180 to 180 degrees
         #     ("wrist_3_joint", -1.57, 1.57)        # -180 to 180 degrees
         # ]
-        # joint_limits = [
-        #     ("elbow_joint", 0, 1.57),             # 0 to 180 degrees
-        # ]
+        joint_limits = [
+            ("elbow_joint", 0, 1.57),             # 0 to 180 degrees
+        ]
 
-        # for joint_name, lower_limit, upper_limit in joint_limits:
-        #     joint_constraint = JointConstraint()
-        #     joint_constraint.joint_name = joint_name
-        #     joint_constraint.position = (lower_limit + upper_limit) / 2  # Set to middle of range
-        #     joint_constraint.tolerance_above = upper_limit - joint_constraint.position
-        #     joint_constraint.tolerance_below = joint_constraint.position - lower_limit
-        #     joint_constraint.weight = 1.0
-        #     goal_constraints.joint_constraints.append(joint_constraint)
+        for joint_name, lower_limit, upper_limit in joint_limits:
+            joint_constraint = JointConstraint()
+            joint_constraint.joint_name = joint_name
+            joint_constraint.position = (lower_limit + upper_limit) / 2  # Set to middle of range
+            joint_constraint.tolerance_above = upper_limit - joint_constraint.position
+            joint_constraint.tolerance_below = joint_constraint.position - lower_limit
+            joint_constraint.weight = 1.0
+            goal_constraints.joint_constraints.append(joint_constraint)
 
         motion_request.goal_constraints.append(goal_constraints)
 
@@ -243,6 +237,28 @@ class RobotControl(Node):
         else:
             self.get_logger().error('Failed to call motion planning service')
             return None
+        
+
+    def throw_trajectory(self,joint_angles):
+        goal_msg = FollowJointTrajectory.Goal()
+        
+        # Create the JointTrajectory
+        msg = JointTrajectory()
+        msg.joint_names = ['shoulder_pan_joint', 'shoulder_lift_joint', 'elbow_joint', 
+                            'wrist_1_joint', 'wrist_2_joint', 'wrist_3_joint']
+
+        point = JointTrajectoryPoint()
+        point.positions = joint_angles  # Target positions in radians
+        # point.velocities = [0.05] * 6  # Target velocities
+        point.time_from_start.sec = 15  # Duration to reach the target
+        point.time_from_start.nanosec = 15000000000
+        msg.points.append(point)
+        
+        # Assign the trajectory to the goal message
+        goal_msg.trajectory = msg
+
+        return goal_msg.trajectory
+
 
     def diagnose_planning_failure(self, error_code):
         if error_code == -1:
@@ -289,10 +305,10 @@ class RobotControl(Node):
 
         constraint = PositionConstraint()
         constraint.header = pose_stamped.header
-        constraint.link_name = 'tool0'
+        constraint.link_name = 'wrist_3_link'
         constraint.constraint_region.primitives.append(SolidPrimitive())
         constraint.constraint_region.primitives[0].type = SolidPrimitive.BOX
-        constraint.constraint_region.primitives[0].dimensions = [0.1, 0.1, 0.1]
+        constraint.constraint_region.primitives[0].dimensions = [0.05, 0.05, 0.05]
         constraint.constraint_region.primitive_poses.append(pose_stamped.pose)
         constraint.weight = 1.0
 
@@ -304,81 +320,17 @@ class RobotControl(Node):
         constraint = OrientationConstraint()
         constraint.header = pose_stamped.header
         constraint.orientation = pose_stamped.pose.orientation
-        constraint.link_name = 'tool0' #"tool0"  # Adjust as needed for your robot's end-effector link
-        constraint.absolute_x_axis_tolerance = 0.1  # 1.14 degrees
-        constraint.absolute_y_axis_tolerance = 0.1  # 1.14 degrees
-        constraint.absolute_z_axis_tolerance = 0.1  # 1.14 degrees
+        constraint.link_name = 'wrist_3_link' #"tool0"  # Adjust as needed for your robot's end-effector link
+        constraint.absolute_x_axis_tolerance = 0.01  # 1.14 degrees
+        constraint.absolute_y_axis_tolerance = 0.01  # 1.14 degrees
+        constraint.absolute_z_axis_tolerance = 0.01  # 1.14 degrees
         constraint.weight = 1.0
 
         return constraint
     
-    def plan_to_pose_cartesian(self, target_pose, step_size=0.01, jump_threshold=0.0):
-        """
-        Plan a cartesian path to a target pose.
-        
-        Args:
-            target_pose (Pose): Target pose for the end effector
-            step_size (float): Maximum distance between waypoints (meters)
-            jump_threshold (float): Maximum allowed joint value jump between consecutive points
-            
-        Returns:
-            RobotTrajectory or None: Planned trajectory if successful, None otherwise
-        """
-        while not self.cartesian_path_client.wait_for_service(timeout_sec=1.0):
-            self.get_logger().info('Cartesian path service not available, waiting...')
-        
-        if self.current_joint_state is None:
-            self.get_logger().error('No joint state received yet')
-            return None
-            
-        request = GetCartesianPath.Request()
-        request.header = Header()
-        request.header.frame_id = 'base_link'
-        request.header.stamp = self.get_clock().now().to_msg()
-        request.start_state.joint_state = self.current_joint_state
-        request.group_name = "ur_manipulator"
-        request.link_name = "tool0"  # or wrist_3_link depending on your setup
-        request.waypoints = [target_pose]
-        request.max_step = step_size
-        request.jump_threshold = jump_threshold
-        request.avoid_collisions = True
-        request.path_constraints.name = "path_constraints"
-        
-        self.get_logger().info(f"Planning cartesian path to target pose: {target_pose}")
-        future = self.cartesian_path_client.call_async(request)
-        rclpy.spin_until_future_complete(self, future)
-        
-        if future.result() is not None:
-            response = future.result()
-            if response.fraction > 0.95:  # Path found for at least 95% of the distance
-                self.get_logger().info(f"Cartesian path planning succeeded, fraction: {response.fraction}")
-                self.display_trajectory(response.solution)
-                return response.solution
-            else:
-                self.get_logger().error(f'Could only compute {response.fraction * 100}% of the path')
-                self.diagnose_cartesian_planning_failure(response.fraction)
-                return None
-        else:
-            self.get_logger().error('Failed to call cartesian path planning service')
-            return None
-
-    def diagnose_cartesian_planning_failure(self, fraction):
-        """Provide diagnostic information for cartesian planning failures"""
-        self.get_logger().error(f"Cartesian planning failed, only achieved {fraction * 100}% of the path")
-        self.get_logger().info("Common causes of cartesian planning failures:")
-        self.get_logger().info("1. Target pose is outside the robot's reachable workspace")
-        self.get_logger().info("2. Straight-line path would exceed joint limits")
-        self.get_logger().info("3. Collision detected along the path")
-        self.get_logger().info("4. IK solutions not found for some waypoints")
-        self.get_logger().info("\nPossible solutions:")
-        self.get_logger().info("1. Try reducing step_size for finer motion planning")
-        self.get_logger().info("2. Adjust the jump_threshold if joint motions are too large")
-        self.get_logger().info("3. Consider using regular plan_to_pose() instead")
-        self.get_logger().info("4. Check if target pose is within workspace")
 
     def display_trajectory(self, trajectory):
         display_trajectory = DisplayTrajectory()
-        display_trajectory.trajectory.append(trajectory)
         
         # Set the start state
         start_state = RobotState()
@@ -388,7 +340,21 @@ class RobotControl(Node):
         # Set the correct model ID (robot name)
         display_trajectory.model_id = "ur"  # Change this to your robot's name as defined in the URDF
 
-        self.get_logger().info(f"Publishing trajectory with {len(trajectory.joint_trajectory.points)} points")
+        
+        # Handle both direct JointTrajectory and planned trajectory cases
+        if hasattr(trajectory, 'joint_trajectory'):
+            # Case 1: Trajectory from motion planning
+            display_trajectory.trajectory.append(trajectory)
+            num_points = len(trajectory.joint_trajectory.points)
+        else:
+            # Case 2: Direct JointTrajectory
+            from moveit_msgs.msg import RobotTrajectory
+            robot_trajectory = RobotTrajectory()
+            robot_trajectory.joint_trajectory = trajectory
+            display_trajectory.trajectory.append(robot_trajectory)
+            num_points = len(trajectory.points)
+
+        self.get_logger().info(f"Publishing trajectory with {num_points} points")
         
         # Publish the trajectory multiple times to ensure it's received and displayed
         for _ in range(5):
@@ -397,90 +363,28 @@ class RobotControl(Node):
 
         self.get_logger().info("Trajectory published for display in RViz")
 
-    def execute_trajectory_unscaled(self, trajectory):
+
+
+    def execute_trajectory(self, trajectory):
         # Wait for the action server to be available
         if not self.trajectory_client.wait_for_server(timeout_sec=5.0):
             self.get_logger().error('Action server not available')
             return False
+        
+        # Open the gripper at the middle of the trajectory
+        # gripper_opened = self.control_gripper("open") # optional
 
         # Create a FollowJointTrajectory action goal
         goal_msg = FollowJointTrajectory.Goal()
-        goal_msg.trajectory = trajectory.joint_trajectory
+        
+        # Handle both direct JointTrajectory and planned trajectory cases
+        if hasattr(trajectory, 'joint_trajectory'):
+            goal_msg.trajectory = trajectory.joint_trajectory
+        else:
+            goal_msg.trajectory = trajectory
 
         # Send the goal
         self.get_logger().info('Sending trajectory execution goal')
-        send_goal_future = self.trajectory_client.send_goal_async(goal_msg)
-
-        # Wait for the server to accept the goal
-        rclpy.spin_until_future_complete(self, send_goal_future)
-        goal_handle = send_goal_future.result()
-
-        if not goal_handle.accepted:
-            self.get_logger().error('Goal rejected')
-            return False
-
-        self.get_logger().info('Goal accepted')
-
-        # Wait for the result
-        result_future = goal_handle.get_result_async()
-        rclpy.spin_until_future_complete(self, result_future)
-
-        result = result_future.result().result
-        if result.error_code == FollowJointTrajectory.Result.SUCCESSFUL:
-            self.get_logger().info('Trajectory execution succeeded')
-            return True
-        else:
-            self.get_logger().error(f'Trajectory execution failed with error code: {result.error_code}')
-            return False
-        
-    def execute_trajectory(self, trajectory, velocity_scaling=0.3, acceleration_scaling=0.3):
-        """
-        Execute a planned trajectory with reduced speed.
-        
-        Args:
-            trajectory: The planned trajectory to execute
-            velocity_scaling: Factor to scale the velocity (0.0 to 1.0)
-            acceleration_scaling: Factor to scale the acceleration (0.0 to 1.0)
-        
-        Returns:
-            bool: True if execution was successful, False otherwise
-        """
-        # Wait for the action server to be available
-        if not self.trajectory_client.wait_for_server(timeout_sec=5.0):
-            self.get_logger().error('Action server not available')
-            return False
-
-        # Create a FollowJointTrajectory action goal
-        goal_msg = FollowJointTrajectory.Goal()
-        
-        # Scale the velocity and acceleration in the trajectory
-        scaled_trajectory = trajectory.joint_trajectory
-        for point in scaled_trajectory.points:
-            # Scale velocities
-            if point.velocities:
-                point.velocities = [v * velocity_scaling for v in point.velocities]
-            
-            # Scale accelerations
-            if point.accelerations:
-                point.accelerations = [a * acceleration_scaling for a in point.accelerations]
-            
-            # Scale time_from_start
-            if velocity_scaling < 1.0:
-                # Convert the current duration to seconds
-                current_duration_seconds = point.time_from_start.sec + (point.time_from_start.nanosec / 1e9)
-                # Scale the duration
-                scaled_duration_seconds = current_duration_seconds / velocity_scaling
-                # Convert back to seconds and nanoseconds
-                scaled_seconds = int(scaled_duration_seconds)
-                scaled_nanoseconds = int((scaled_duration_seconds - scaled_seconds) * 1e9)
-                # Create new Duration
-                point.time_from_start.sec = scaled_seconds
-                point.time_from_start.nanosec = scaled_nanoseconds
-
-        goal_msg.trajectory = scaled_trajectory
-
-        # Send the goal
-        self.get_logger().info(f'Sending trajectory execution goal (velocity scaling: {velocity_scaling}, acceleration scaling: {acceleration_scaling})')
         send_goal_future = self.trajectory_client.send_goal_async(goal_msg)
 
         # Wait for the server to accept the goal
@@ -510,6 +414,11 @@ def main(args=None):
     robot_control = RobotControl()
     executor = MultiThreadedExecutor()
     executor.add_node(robot_control)
+    joint_angles=[-1.17,-93.15,101.19,-131.58,-92.46,-183.90]
+    # joint_angles=[0.14,-93.30,111.13,200.65,-89.04,-0.03]
+    joint_angles=np.deg2rad(joint_angles)
+    joint_angles=list(joint_angles)
+    print(joint_angles)
 
     # Give more time for the node to initialize and receive joint states
     for _ in range(10):  # Try up to 10 times
@@ -538,23 +447,28 @@ def main(args=None):
         else:
             robot_control.get_logger().warn("Failed to get current joint angles")
 
-        # 3. Plan to a new end effector position using MoveIt planner
-        target_pose = Pose()
-        # Increase height by 0.2 with respect to the current position
-        target_pose.position.z = current_ee_pose.position.z + 0.4        # Reamining all the same
-        target_pose.position.x = current_ee_pose.position.x
-        target_pose.position.y = current_ee_pose.position.y
-        target_pose.orientation = current_ee_pose.orientation
+        # # 3. Plan to a new end effector position using MoveIt planner
+        # target_pose = Pose()
+        # # Increase height by 0.2 with respect to the current position
+        # target_pose.position.z = current_ee_pose.position.z + 0.4        # Reamining all the same
+        # target_pose.position.x = current_ee_pose.position.x
+        # target_pose.position.y = current_ee_pose.position.y
+        # target_pose.orientation = current_ee_pose.orientation
 
-        robot_control.get_logger().info(f"Planning to target pose: {target_pose}")
+        # robot_control.get_logger().info(f"Planning to target pose: {target_pose}")
 
         # 4. Plan and plot the trajectory in RViz
-        trajectory = robot_control.plan_to_pose(target_pose)
+        # trajectory = robot_control.plan_to_pose(target_pose)
+        trajectory=robot_control.throw_trajectory(joint_angles)
+
         if trajectory:
             robot_control.get_logger().info("Trajectory planned successfully")
+            # Close the gripper at the start of the trajectory
+            # gripper_closed = self.control_gripper("close") # optional
             robot_control.display_trajectory(trajectory)
             robot_control.get_logger().info("Trajectory should now be visible in RViz")
             
+
             # 5. Execute the trajectory
 
             execute_input = input("Do you want to execute the trajectory? (y/n): ")

@@ -47,8 +47,14 @@ class Place_API:
         self.setup_realsense("realsense_config.json")
         
         # Transform matrix from base to camera
-        self.temp_xyz = [-0.605256,-0.336046, 1.04207]
-        self.temp_xyzw = [0.711241, -0.702776, -0.0126768, 0.00905347]
+        self.temp_xyz = [-0.480605,0.816466, 1.05474]
+ 
+        self.eye_to_hand_scale = [0.5, 0.667] # Adding this because of the calibration issue - As we performed calibration @1280*720 but the real time we are using is 640*480
+
+        #self.temp_xyz[0] = self.temp_xyz[0] * self.eye_to_hand_scale[0]
+        #self.temp_xyz[1] = self.temp_xyz[1] * self.eye_to_hand_scale[1]
+
+        self.temp_xyzw = [0.00416942, 0.99541, 0.0282913, 0.00934988]
         if self.temp_xyz and self.temp_xyzw:
             self.T_base_camera = np.eye(4)
             self.T_base_camera[:3, 3] = self.temp_xyz
@@ -65,6 +71,8 @@ class Place_API:
             config.enable_device(self.realsense_serial_no)
             config.enable_stream(rs.stream.depth, 640, 480, rs.format.z16, 30)
             config.enable_stream(rs.stream.color, 640, 480, rs.format.bgr8, 30)
+            #config.enable_stream(rs.stream.depth, 848, 480, rs.format.z16, 30)
+            #config.enable_stream(rs.stream.color, 1280, 720, rs.format.bgr8, 30)
             
             profile = pipeline.start(config)
             device = profile.get_device()
@@ -219,7 +227,7 @@ class Place_API:
         #T_base_camera = np.linalg.inv(self.T_base_camera)
         T_base_camera = self.T_base_camera
         # temp_rotation
-        temp_rot =[[0,1], [1,0]]
+        temp_rot =[[0, 1], [1,0]] # original - [[0,1], [1,0]]
         T_base_cam_xy = T_base_camera[:2, 3]
 
         point_cam_xy = point_camera[:2]
@@ -229,6 +237,10 @@ class Place_API:
 
         pos_base = temp_rot @ point_cam_xy - T_base_cam_xy
         pos_base = np.append(pos_base, point_camera[2])
+
+        # convert pos_base y to negative
+        pos_base[0] = -pos_base[0]
+        pos_base[1] = -pos_base[1]
         #print("Pos Base: ", pos_base)
         
         return pos_base
@@ -266,15 +278,23 @@ class Place_API:
                 
                 # Get 3D position in camera frame
                 pos_camera = self.pixel_to_3d(cX, cY, depth)
+
+                # Scale the position to match the calibration
+                pos_camera[0] = pos_camera[0] * self.eye_to_hand_scale[0]
+                pos_camera[1] = pos_camera[1] * self.eye_to_hand_scale[1]
                 
                 # Calculate all transforms
-                T_camera_obj, T_base_obj, pos_base, quat_base, rot_confidence = self.calculate_transforms(
+                T_camera_obj, T_base_obj, pos_base1, quat_base, rot_confidence = self.calculate_transforms(
                     pos_camera, mask, depth_image
                 )
 
-                #print("Pose Base before transform: ", pos_base)
+                print("Pose Base before transform: ", pos_base1)
                 pos_base = self.transform_point_camera_to_base(pos_camera)
-                #print("Pose Base after transform: ", pos_base)
+                print("Pose Base after transform: ", pos_base)
+
+                pos_base[0] = -pos_base1[0]
+                pos_base[1] = pos_base1[1]
+                
 
                 
                 processed_result = {

@@ -1,0 +1,1 @@
+Current Pose: geometry_msgs.msg.Pose(position=geometry_msgs.msg.Point(x=0.17738730346377188, y=0.4684560985721385, z=0.4654441095457524), orientation=geometry_msgs.msg.Quaternion(x=0.9995784888468985, y=0.01863680080461827, z=0.005969476120733072, w=-0.02144480461939017))
